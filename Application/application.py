@@ -42,6 +42,9 @@ test_df = pd.read_csv(r'data\application_test.csv', nrows=None)
 print("Train samples: {}, test samples: {}".format(len(df), len(test_df)))
 df = df.append(test_df).reset_index()
 
+
+
+
 # DATA PREPROCESSING
 df = df[df['CODE_GENDER'] != 'XNA']  # 4 gözlem değeri XNA olarak girilmiş bundan kurtarıldı.
 df['DAYS_EMPLOYED'].replace(365243, np.nan, inplace=True)  # NaN değerleri 365243 olarak girilmiş, onlar düzeltildi
@@ -77,13 +80,19 @@ df["NEW_AGE/CAR_AGE"] = df["NEW_AGE"] / df["OWN_CAR_AGE"]
 # FEATURE 10 - EXT AĞIRLIKLI ÇARPIM
 df['NEW_EXT_WEIGHTED'] = df.EXT_SOURCE_1 * 2 + df.EXT_SOURCE_2 * 1 + df.EXT_SOURCE_3 * 3
 # FEATURE 11 - EXT MEAN
-df["NEW_EXT_MEAN"] = df[['EXT_SOURCE_1', 'EXT_SOURCE_2', 'EXT_SOURCE_3']].mean(axis=1)
-# FEATURE 12 - EXT STD
-df['NEW_SCORES_STD'] = df[['EXT_SOURCE_1', 'EXT_SOURCE_2', 'EXT_SOURCE_3']].std(axis=1)
-df['NEW_SCORES_STD'] = df['NEW_SCORES_STD'].fillna(df['NEW_SCORES_STD'].mean())
-# FEATURE 13 - NEW EXT PROCESS
-# df.loc[(df["EXT_SOURCE_1"] >= 0.5) | (df["EXT_SOURCE_2"] >= 0.55) | (df["EXT_SOURCE_3"] >= 0.45), "NEW_BOMB"] = 0
-# df.loc[(df["EXT_SOURCE_1"] < 0.5) | (df["EXT_SOURCE_2"] < 0.55) | (df["EXT_SOURCE_3"] < 0.45), "NEW_BOMB"] = 1
+# df["NEW_EXT_MEAN"] = df[['EXT_SOURCE_1', 'EXT_SOURCE_2', 'EXT_SOURCE_3']].mean(axis=1)
+# # FEATURE 12 - EXT STD
+# df['NEW_SCORES_STD'] = df[['EXT_SOURCE_1', 'EXT_SOURCE_2', 'EXT_SOURCE_3']].std(axis=1)
+# df['NEW_SCORES_STD'] = df['NEW_SCORES_STD'].fillna(df['NEW_SCORES_STD'].mean())
+
+#################
+np.warnings.filterwarnings('ignore', r'All-NaN (slice|axis) encountered')
+    for function_name in ['min', 'max', 'mean', 'nanmedian', 'var']:
+        feature_name = 'EXT_SOURCES_{}'.format(function_name.upper())
+        df["NEW_" + feature_name] = eval('np.{}'.format(function_name))(
+            df[['EXT_SOURCE_1', 'EXT_SOURCE_2', 'EXT_SOURCE_3']], axis=1)
+
+
 # FEATURE 14 - DOKUMANLARIN TOPLAMI / DOCS ATILDI
 docs = [f for f in df.columns if 'FLAG_DOC' in f]
 df['NEW_DOCUMENT_COUNT'] = df[docs].sum(axis=1)
@@ -109,6 +118,13 @@ df["NEW_FRAUD_1"] = df["REG_CITY_NOT_LIVE_CITY"] + df["REG_CITY_NOT_WORK_CITY"] 
 df["NEW_FRAUD"] = (df["NEW_FRAUD_1"] + 1) * df["DAYS_ID_PUBLISH"]
 del df["NEW_FRAUD_1"]
 df["NEW_FRAUD_std"] = (df[["REG_CITY_NOT_LIVE_CITY", "REG_CITY_NOT_WORK_CITY", "LIVE_CITY_NOT_WORK_CITY"]]).std(axis=1)
+
+
+
+
+
+
+
 
 
 # CLEAN CLASSES & LABEL ENCODING PART
