@@ -1,6 +1,6 @@
 # FEATURE ANALYSIS
 
-# CATEGORIC FEATURES
+## CATEGORIC FEATURES
 
 **CODE_GENDER  - CİNSİYET**
 
@@ -13,6 +13,8 @@ F                 202448  307511 65.834        0.070
 M                 105059  307511 34.164        0.101
 XNA                    4  307511  0.001        0.000
 ```
+
+###### *Çıkarımlar* : 
 
 Cinsiyeti belirtiyor ve 3 sınıfı var. 
 
@@ -35,6 +37,8 @@ Spouse, partner            11370  307511  3.697        0.079
 Unaccompanied             248526  307511 80.819        0.082
 ```
 
+###### *Çıkarımlar* : 
+
 Birbirine yakın sınıflar var ve çeşitlilik yok düzenlenebilir veya atılabilir.
 
 ---
@@ -55,6 +59,8 @@ Unemployed                          22  307511  0.007        0.364
 Working                         158774  307511 51.632        0.096
 ```
 
+###### *Çıkarımlar* : 
+
 Çok düşük gözlemlenen sınıflar var düzeltilmeli.
 
 ---
@@ -69,6 +75,8 @@ Incomplete higher                            10277  307511  3.342        0.085
 Lower secondary                               3816  307511  1.241        0.109
 Secondary / secondary special               218391  307511 71.019        0.089
 ```
+
+###### *Çıkarımlar* : 
 
 Label encode uygulanabilir.
 
@@ -88,13 +96,15 @@ Unknown                                2  307511  0.001        0.000
 Widow                              16088  307511  5.232        0.058
 ```
 
+###### *Çıkarımlar* : 
+
 Sınıf sayısı indirgenebilir. Evli / Evli Değil
 
 Uç örnek : Boşanmış ve erkek olan müşterilerin durumları gözlemlenebilir.
 
 ---
 
-**NAME_HOUSING_TYPE**
+**NAME_HOUSING_TYPE **
 
 ```
 NAME_HOUSING_TYPE : has 6 unique category 	- object
@@ -107,6 +117,8 @@ Office apartment                  2617  307511  0.851        0.066
 Rented apartment                  4881  307511  1.587        0.123
 With parents                     14840  307511  4.826        0.117
 ```
+
+###### *Çıkarımlar* : 
 
 Sınıflar indirgenebilir. Aileleri ile yaşayanlarda ve apartman kiralayanlarda temerrüt durumu daha fazla.
 
@@ -122,6 +134,8 @@ FLAG_MOBIL : has 2 unique category 	- int64
 1      307510  307511 100.000        0.081
 ```
 
+###### *Çıkarımlar* : 
+
 Atılması gerekiyor.
 
 ---
@@ -135,6 +149,8 @@ FLAG_EMP_PHONE : has 2 unique category 	- int64
 0           55386  307511 18.011        0.054
 1          252125  307511 81.989        0.087
 ```
+
+###### *Çıkarımlar* : 
 
 Gereksiz gibi duruyor atılabilir.
 
@@ -150,6 +166,8 @@ FLAG_PHONE : has 2 unique category 	- int64
 1       86431  307511 28.107        0.070
 ```
 
+###### *Çıkarımlar* : 
+
 Gereksiz gibi duruyor atılabilir.
 
 ---
@@ -163,6 +181,8 @@ FLAG_EMAIL : has 2 unique category 	- int64
 0      290069  307511 94.328        0.081
 1       17442  307511  5.672        0.079
 ```
+
+###### *Çıkarımlar* : 
 
 Gereksiz gibi duruyor atılabilir..
 
@@ -183,6 +203,8 @@ TUESDAY                         53901  307511 17.528        0.084
 WEDNESDAY                       51934  307511 16.889        0.082
 ```
 
+###### *Çıkarımlar* : 
+
 Anlamsız atılabilir.
 
 ---
@@ -196,6 +218,8 @@ REG_REGION_NOT_LIVE_REGION : has 2 unique category 	- int64
 0                      302854  307511 98.486        0.081
 1                        4657  307511  1.514        0.093
 ```
+
+###### *Çıkarımlar* : 
 
 Çeşitlilik yok atılabilir.
 
@@ -211,6 +235,8 @@ REG_REGION_NOT_WORK_REGION : has 2 unique category 	- int64
 1                       15612  307511  5.077        0.089
 ```
 
+###### *Çıkarımlar* : 
+
 Farklılık yok atılabilir.
 
 ---
@@ -224,6 +250,8 @@ LIVE_REGION_NOT_WORK_REGION : has 2 unique category 	- int64
 0                       295008  307511 95.934        0.081
 1                        12503  307511  4.066        0.084
 ```
+
+###### *Çıkarımlar* : 
 
 Farklılık yok atılabilir. 
 
@@ -242,6 +270,8 @@ reg oper spec account               12080  307511  3.928        0.066
 
 ```
 
+###### *Çıkarımlar* : 
+
 Anlamsız geldi atılabilir gibi duruyor.
 
 ---
@@ -258,7 +288,9 @@ specific housing            1499  307511  0.487        0.101
 terraced house              1212  307511  0.394        0.085
 ```
 
-???
+###### *Çıkarımlar* : 
+
+Atılmalı.
 
 ---
 
@@ -277,6 +309,8 @@ Stone, brick               64815  307511 21.077        0.074
 Wooden                      5362  307511  1.744        0.097
 ```
 
+###### *Çıkarımlar* : 
+
 Atılabilir.
 
 ---
@@ -292,11 +326,15 @@ No                                159428  307511 51.845        0.070
 Yes                                 2328  307511  0.757        0.096
 ```
 
+###### *Çıkarımlar* : 
+
 Atılabilir, çok az sayıda 
 
 ---
 
 **FLAG_DOCUMENT_XX**
+
+###### *Çıkarımlar* : 
 
 Tüm döküman sayılarının toplamları alınabilir. 20 tane var.
 
@@ -314,6 +352,8 @@ AMT_REQ_CREDIT_BUREAU_HOUR : has 5 unique category 	- float64
 3.000                           9  307511  0.003        0.000
 4.000                           1  307511  0.000        0.000
 ```
+
+###### *Çıkarımlar* : 
 
 Anlamsız gibi görünüyor.
 
@@ -336,5 +376,96 @@ DEF_60_CNT_SOCIAL_CIRCLE : has 9 unique category 	- float64
 24.000                         1  307511  0.000        0.000
 ```
 
+###### *Çıkarımlar* : 
+
+Üzerinde çalışması gerekiyor.
+
+## **NUMERICAL FEATURES**
+
+**DAYS_BIRTH**
+
+![days_birth](.\images\days_birth.png)
+
+###### *Çıkarımlar* : 
+
+Bu değişkende yaklaşık olarak -15000 ile  -8000 arasında anlamlı bir farklılık gözlemlenmiştir. 
 
 
+
+**DAYS_EMPLOYED**
+
+![days_employed](.\images\days_employed.png)
+
+###### *Çıkarımlar* : 
+
+Gün cinsinden verilen bu değişkende -350000 ile -400000 arasında gürültü tespit edilmiştir . Bu sayılar yaklaşık olarak 1000 yıla denk gelmektedir. Çıkarılması düşünülebilir.
+
+
+
+**DAYS_ID_PUBLISH**
+
+![days_id_publish](.\images\days_id_publish.png)
+
+###### *Çıkarımlar* : 
+
+Bu değişkende ise - 3000 ile 0 arasında anlamlı bir farklılık gözlemlenmiştir.
+
+
+
+**DAYS_LAST_PHONE_CHANGE**
+
+![days_last_phone](.\images\days_last_phone.png)
+
+###### *Çıkarımlar* : 
+
+Son telefonun değiştirilme zamanını gösteren bu değişkende -900 ile -100 arasında anlamlı bir farklılık gözlemlenmiştir.
+
+
+
+**DAYS_REGISTRATION**
+
+![days_registration](.\images\days_registration.png)
+
+###### *Çıkarımlar* : 
+
+-5000 ile 0 arasında anlamlı bir farklılık gözlemlenmiştir.
+
+
+
+**EXT_SOURCE_1**
+
+![ex1](.\images\ex1.png)
+
+###### *Çıkarımlar* : 
+
+Başka kaynaklardan gelen skorları içerin bu değişkende  önemli seviyede farklılıklar gözlemlenmiştir.
+
+
+
+**EXT_SOURCE_2**
+
+![ex2](.\images\ex2.png)
+
+###### *Çıkarımlar* : 
+
+Başka kaynaklardan gelen skorları içerin bu değişkende  önemli seviyede farklılıklar gözlemlenmiştir.
+
+
+
+**EXT_SOURCE_3**
+
+![ext3](.\images\ext3.png)
+
+###### *Çıkarımlar* : 
+
+Başka kaynaklardan gelen skorları içerin bu değişkende  önemli seviyede farklılıklar gözlemlenmiştir.
+
+
+
+**OWN_CAR_AGE**
+
+![own_car_age](.\images\own_car_age.png)
+
+###### *Çıkarımlar* : 
+
+Sahip olunan arabanın yaşını veren bu değişkende  60 ile 70 arasında gürültü testip edilmiştir.
