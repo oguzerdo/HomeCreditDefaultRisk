@@ -1,0 +1,6 @@
+Application tablosunda:
+
+rare encode ile beraber : 0.79574
+
+rare encode olmadan : 0.79556
+
