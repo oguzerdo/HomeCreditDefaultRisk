@@ -378,7 +378,78 @@ DEF_60_CNT_SOCIAL_CIRCLE : has 9 unique category 	- float64
 
 ###### *Çıkarımlar* : 
 
-Üzerinde çalışması gerekiyor.
+Üzerinde çalışılması gerekiyor.
+
+---
+
+
+
+# FEATURE ENGINEERING SUGGESTIONS
+
+**FLAG_OWN_CAR + FLAG_OWN_REALTY**
+
+Arabası ve kendine özel mülkü var mı ?
+
+```
+FLAG_OWN_CAR : has 2 unique category 	- object
+
+              FLAG_OWN_CAR   Count  Ratio  TARGET_MEAN
+FLAG_OWN_CAR                                          
+N                   202924  307511 65.989        0.085
+Y                   104587  307511 34.011        0.072
+```
+
+```
+FLAG_OWN_REALTY : has 2 unique category 	- object
+
+   FLAG_OWN_REALTY   Count  Ratio  TARGET_MEAN
+N            94199  307511 30.633        0.083
+Y           213312  307511 69.367        0.080
+```
+
+---
+
+**REG_CITY_NOT_LIVE_CITY:**  Kalıcı adres iletişim adresiyle eşleşmiyorsa 1
+
+```
+REG_CITY_NOT_LIVE_CITY : has 2 unique category 	- int64
+
+   REG_CITY_NOT_LIVE_CITY   Count  Ratio  TARGET_MEAN
+0                  283472  307511 92.183        0.077
+1                   24039  307511  7.817        0.122
+```
+
+Güzel bir farklılık var bir şeyler türetilebilir.
+
+---
+
+**REG_CITY_NOT_WORK_CITY:** Kalıcı adres iş adresi ile eşleşmiyorsa 1
+
+```
+REG_CITY_NOT_WORK_CITY : has 2 unique category 	- int64
+
+   REG_CITY_NOT_WORK_CITY   Count  Ratio  TARGET_MEAN
+0                  236644  307511 76.955        0.073
+1                   70867  307511 23.045        0.106
+```
+
+Güzel bir farklılık var bir şeyler türetilebilir.
+
+---
+
+**LIVE_CITY_NOT_WORK_CITY**: iletişim adresi iş adresi ile eşleşmiyorsa 1
+
+```
+LIVE_CITY_NOT_WORK_CITY : has 2 unique category 	- int64
+
+   LIVE_CITY_NOT_WORK_CITY   Count  Ratio  TARGET_MEAN
+0                   252296  307511 82.045        0.077
+1                    55215  307511 17.955        0.100
+```
+
+---
+
+
 
 ## **NUMERICAL FEATURES**
 
@@ -388,9 +459,9 @@ DEF_60_CNT_SOCIAL_CIRCLE : has 9 unique category 	- float64
 
 ###### *Çıkarımlar* : 
 
-Bu değişkende yaklaşık olarak -15000 ile  -8000 arasında anlamlı bir farklılık gözlemlenmiştir. 
+Bu değişkende yaklaşık olarak -15000 ile  -8000 arasında bir farklılık gözlemlenmiştir. 
 
-
+---
 
 **DAYS_EMPLOYED**
 
@@ -398,9 +469,9 @@ Bu değişkende yaklaşık olarak -15000 ile  -8000 arasında anlamlı bir farkl
 
 ###### *Çıkarımlar* : 
 
-Gün cinsinden verilen bu değişkende -350000 ile -400000 arasında gürültü tespit edilmiştir . Bu sayılar yaklaşık olarak 1000 yıla denk gelmektedir. Çıkarılması düşünülebilir.
+Gün cinsinden verilen bu değişkende -350000 ile -400000 arasında gürültü tespit edilmiştir . Bu sayılar yaklaşık olarak 1000 yıla denk gelmektedir. Çıkarılması gerekiyor.
 
-
+---
 
 **DAYS_ID_PUBLISH**
 
@@ -408,9 +479,9 @@ Gün cinsinden verilen bu değişkende -350000 ile -400000 arasında gürültü 
 
 ###### *Çıkarımlar* : 
 
-Bu değişkende ise - 3000 ile 0 arasında anlamlı bir farklılık gözlemlenmiştir.
+Bu değişkende ise - 3000 ile 0 arasında bir farklılık gözlemlenmiştir.
 
-
+---
 
 **DAYS_LAST_PHONE_CHANGE**
 
@@ -418,9 +489,9 @@ Bu değişkende ise - 3000 ile 0 arasında anlamlı bir farklılık gözlemlenmi
 
 ###### *Çıkarımlar* : 
 
-Son telefonun değiştirilme zamanını gösteren bu değişkende -900 ile -100 arasında anlamlı bir farklılık gözlemlenmiştir.
+Son telefonun değiştirilme zamanını gösteren bu değişkende -900 ile -100 arasında bir farklılık gözlemlenmiştir.
 
-
+---
 
 **DAYS_REGISTRATION**
 
@@ -428,7 +499,7 @@ Son telefonun değiştirilme zamanını gösteren bu değişkende -900 ile -100 
 
 ###### *Çıkarımlar* : 
 
--5000 ile 0 arasında anlamlı bir farklılık gözlemlenmiştir.
+-5000 ile 0 arasında bir farklılık gözlemlenmiştir.
 
 
 
@@ -438,7 +509,7 @@ Son telefonun değiştirilme zamanını gösteren bu değişkende -900 ile -100 
 
 ###### *Çıkarımlar* : 
 
-Başka kaynaklardan gelen skorları içerin bu değişkende  önemli seviyede farklılıklar gözlemlenmiştir.
+Başka kaynaklardan gelen skorları içeren bu değişkende  önemli seviyede farklılıklar gözlemlenmiştir.
 
 
 
@@ -448,7 +519,7 @@ Başka kaynaklardan gelen skorları içerin bu değişkende  önemli seviyede fa
 
 ###### *Çıkarımlar* : 
 
-Başka kaynaklardan gelen skorları içerin bu değişkende  önemli seviyede farklılıklar gözlemlenmiştir.
+Başka kaynaklardan gelen skorları içeren bu değişkende  önemli seviyede farklılıklar gözlemlenmiştir.
 
 
 
@@ -458,14 +529,7 @@ Başka kaynaklardan gelen skorları içerin bu değişkende  önemli seviyede fa
 
 ###### *Çıkarımlar* : 
 
-Başka kaynaklardan gelen skorları içerin bu değişkende  önemli seviyede farklılıklar gözlemlenmiştir.
+Başka kaynaklardan gelen skorları içeren bu değişkende  önemli seviyede farklılıklar gözlemlenmiştir.
 
 
 
-**OWN_CAR_AGE**
-
-![own_car_age](./images/own_car_age.png)
-
-###### *Çıkarımlar* : 
-
-Sahip olunan arabanın yaşını veren bu değişkende  60 ile 70 arasında gürültü testip edilmiştir.
