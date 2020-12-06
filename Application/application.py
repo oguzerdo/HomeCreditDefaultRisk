@@ -42,6 +42,8 @@ test_df = pd.read_csv(r'data\application_test.csv', nrows=None)
 print("Train samples: {}, test samples: {}".format(len(df), len(test_df)))
 df = df.append(test_df).reset_index()
 
+
+
 # DATA PREPROCESSING
 df = df[df['CODE_GENDER'] != 'XNA']  # 4 gözlem değeri XNA olarak girilmiş bundan kurtarıldı.
 df['DAYS_EMPLOYED'].replace(365243, np.nan, inplace=True)  # NaN değerleri 365243 olarak girilmiş, onlar düzeltildi
