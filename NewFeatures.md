@@ -71,7 +71,7 @@ LIVE_CITY_NOT_WORK_CITY : has 2 unique category 	- int64
 
 **DAYS_EMPLOYED**
 
-![image-20201206051658396](./images/days_employed.png)
+![image-20201206051658396](C:/Users/oe/Desktop/HCDR_P/Application/images/days_employed.png)
 
 
 
@@ -79,7 +79,7 @@ LIVE_CITY_NOT_WORK_CITY : has 2 unique category 	- int64
 
 
 
-![image-20201206051810743](./images/days_registration.png)
+![image-20201206051810743](C:/Users/oe/Desktop/HCDR_P/Application/images/days_registration.png)
 
 
 
@@ -87,7 +87,7 @@ LIVE_CITY_NOT_WORK_CITY : has 2 unique category 	- int64
 
 
 
-![image-20201206051842342](./images/days_id_publish.png)
+![image-20201206051842342](C:/Users/oe/Desktop/HCDR_P/Application/images/days_id_publish.png)
 
 
 
@@ -95,7 +95,7 @@ LIVE_CITY_NOT_WORK_CITY : has 2 unique category 	- int64
 
 
 
-![image-20201206051935054](./images/own_car_age.png)
+![image-20201206051935054](C:\Users\oe\Desktop\HCDR_P\Application\images\own_car_age.png)
 
 
 
@@ -103,7 +103,7 @@ LIVE_CITY_NOT_WORK_CITY : has 2 unique category 	- int64
 
 
 
-![image-20201206052000335](./images/ex1.png)
+![image-20201206052000335](C:\Users\oe\Desktop\HCDR_P\Application\images\ex1.png)
 
 
 
@@ -111,7 +111,7 @@ LIVE_CITY_NOT_WORK_CITY : has 2 unique category 	- int64
 
 
 
-![image-20201206052018086](./images/ex2.png)
+![image-20201206052018086](C:\Users\oe\Desktop\HCDR_P\Application\images\ex2.png)
 
 
 
@@ -119,7 +119,7 @@ LIVE_CITY_NOT_WORK_CITY : has 2 unique category 	- int64
 
 
 
-![image-20201206052038495](./images/ext3.png)
+![image-20201206052038495](C:\Users\oe\Desktop\HCDR_P\Application\images\ext3.png)
 
 
 
@@ -127,7 +127,7 @@ LIVE_CITY_NOT_WORK_CITY : has 2 unique category 	- int64
 
 
 
-![image-20201206052200543](./images/days_last_phone.png)
+![image-20201206052200543](C:/Users/oe/Desktop/HCDR_P/Application/images/days_last_phone.png)
 
 
 
