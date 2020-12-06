@@ -94,7 +94,7 @@ Uç örnek : Boşanmış ve erkek olan müşterilerin durumları gözlemlenebili
 
 ---
 
-**NAME_HOUSING_TYPE **
+**NAME_HOUSING_TYPE**
 
 ```
 NAME_HOUSING_TYPE : has 6 unique category 	- object
@@ -335,8 +335,6 @@ DEF_60_CNT_SOCIAL_CIRCLE : has 9 unique category 	- float64
 7.000                          1  307511  0.000        0.000
 24.000                         1  307511  0.000        0.000
 ```
-
-# 
 
 
 
