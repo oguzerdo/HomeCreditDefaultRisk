@@ -36,7 +36,6 @@ def one_hot_encoder(df, nan_as_category=True):
     return df, new_columns
 
 
-def application_train_test(num_rows=None, nan_as_category=False):
     # Read data and merge
     df = pd.read_csv(r'data\application_train.csv', nrows=None)
     test_df = pd.read_csv(r'data\application_test.csv', nrows=None)
@@ -67,10 +66,6 @@ def application_train_test(num_rows=None, nan_as_category=False):
     df['NEW_ANNUITY_INCOME_PERC'] = df['AMT_ANNUITY'] / df['AMT_INCOME_TOTAL']
     # FEATURE 4 - GELİR / YILLIK KREDİ * FAMILYSIZE #MODEL SONUCUNA GÖRE DEĞERLENDİR
     df["NEW_FAMILY_EFFECT"] = df['NEW_AMT/FAM'] / df['CNT_FAM_MEMBERS']
-    # # FEATURE 5 - ALMAK İSTEDİĞİ MAL VE ÇEKTİĞİ KREDİ ARASINDAKİ FARKA GÖRE DERECELENDİRME
-    # df.loc[(df["AMT_CREDIT"] - df["AMT_GOODS_PRICE"] > 0), "NEW_AMT_STATUS"] = 1
-    # df.loc[(df["AMT_CREDIT"] - df["AMT_GOODS_PRICE"] == 0), "NEW_AMT_STATUS"] = 2
-    # df.loc[(df["AMT_CREDIT"] - df["AMT_GOODS_PRICE"] < 0), "NEW_AMT_STATUS"] = 3
     # FEATURE 6 - ÇEKİLEN KREDİ İLE ÜRÜN ARASINDAKİ FARKIN GELİRE ORANI ***
     df["NEW_C-GP"] = (df["AMT_GOODS_PRICE"] - df["AMT_CREDIT"]) / df["AMT_INCOME_TOTAL"]
     # FEATURE 7 - YAŞ / KREDİ MİKTARI
@@ -81,15 +76,14 @@ def application_train_test(num_rows=None, nan_as_category=False):
     df["NEW_AGE/CAR_AGE"] = df["NEW_AGE"] / df["OWN_CAR_AGE"]
     # FEATURE 10 - EXT AĞIRLIKLI ÇARPIM
     df['NEW_EXT_WEIGHTED'] = df.EXT_SOURCE_1 * 2 + df.EXT_SOURCE_2 * 1 + df.EXT_SOURCE_3 * 3
-    #df["NEW_EXT_X"] = df["EXT_SOURCE_1"] * df["EXT_SOURCE_2"] * df["EXT_SOURCE_3"]
     # FEATURE 11 - EXT MEAN
     df["NEW_EXT_MEAN"] = df[['EXT_SOURCE_1', 'EXT_SOURCE_2', 'EXT_SOURCE_3']].mean(axis=1)
     # FEATURE 12 - EXT STD
     df['NEW_SCORES_STD'] = df[['EXT_SOURCE_1', 'EXT_SOURCE_2', 'EXT_SOURCE_3']].std(axis=1)
     df['NEW_SCORES_STD'] = df['NEW_SCORES_STD'].fillna(df['NEW_SCORES_STD'].mean())
     # FEATURE 13 - NEW EXT PROCESS
-    df.loc[(df["EXT_SOURCE_1"] >= 0.5) | (df["EXT_SOURCE_2"] >= 0.55) | (df["EXT_SOURCE_3"] >= 0.45), "NEW_BOMB"] = 0
-    df.loc[(df["EXT_SOURCE_1"] < 0.5) | (df["EXT_SOURCE_2"] < 0.55) | (df["EXT_SOURCE_3"] < 0.45), "NEW_BOMB"] = 1
+    # df.loc[(df["EXT_SOURCE_1"] >= 0.5) | (df["EXT_SOURCE_2"] >= 0.55) | (df["EXT_SOURCE_3"] >= 0.45), "NEW_BOMB"] = 0
+    # df.loc[(df["EXT_SOURCE_1"] < 0.5) | (df["EXT_SOURCE_2"] < 0.55) | (df["EXT_SOURCE_3"] < 0.45), "NEW_BOMB"] = 1
     # FEATURE 14 - DOKUMANLARIN TOPLAMI / DOCS ATILDI
     docs = [f for f in df.columns if 'FLAG_DOC' in f]
     df['NEW_DOCUMENT_COUNT'] = df[docs].sum(axis=1)
@@ -216,10 +210,7 @@ def application_train_test(num_rows=None, nan_as_category=False):
 
     df, app_cols = one_hot_encoder(df, True)
 
-    return df
 
-df = application_train_test(num_rows=None, nan_as_category=True)
-df.shape
 X = df.loc[:307510, :].drop(["TARGET","index"], axis=1)
 y = df.loc[:307510, "TARGET"]
 
@@ -244,3 +235,5 @@ plt.title('Feature Importance ')
 plt.tight_layout()
 plt.savefig('LGBM_importances.png')
 plt.show()
+
+
