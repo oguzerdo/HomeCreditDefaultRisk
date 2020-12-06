@@ -104,7 +104,7 @@ Uç örnek : Boşanmış ve erkek olan müşterilerin durumları gözlemlenebili
 
 ---
 
-**NAME_HOUSING_TYPE **
+**NAME_HOUSING_TYPE**
 
 ```
 NAME_HOUSING_TYPE : has 6 unique category 	- object
@@ -384,7 +384,7 @@ DEF_60_CNT_SOCIAL_CIRCLE : has 9 unique category 	- float64
 
 **DAYS_BIRTH**
 
-![days_birth](.\images\days_birth.png)
+![days_birth](./images/days_birth.png)
 
 ###### *Çıkarımlar* : 
 
@@ -394,7 +394,7 @@ Bu değişkende yaklaşık olarak -15000 ile  -8000 arasında anlamlı bir farkl
 
 **DAYS_EMPLOYED**
 
-![days_employed](.\images\days_employed.png)
+![days_employed](./images/days_employed.png)
 
 ###### *Çıkarımlar* : 
 
@@ -404,7 +404,7 @@ Gün cinsinden verilen bu değişkende -350000 ile -400000 arasında gürültü 
 
 **DAYS_ID_PUBLISH**
 
-![days_id_publish](.\images\days_id_publish.png)
+![days_id_publish](./images/days_id_publish.png)
 
 ###### *Çıkarımlar* : 
 
@@ -414,7 +414,7 @@ Bu değişkende ise - 3000 ile 0 arasında anlamlı bir farklılık gözlemlenmi
 
 **DAYS_LAST_PHONE_CHANGE**
 
-![days_last_phone](.\images\days_last_phone.png)
+![days_last_phone](./images/days_last_phone.png)
 
 ###### *Çıkarımlar* : 
 
@@ -424,7 +424,7 @@ Son telefonun değiştirilme zamanını gösteren bu değişkende -900 ile -100 
 
 **DAYS_REGISTRATION**
 
-![days_registration](.\images\days_registration.png)
+![days_registration](./images/days_registration.png)
 
 ###### *Çıkarımlar* : 
 
@@ -434,7 +434,7 @@ Son telefonun değiştirilme zamanını gösteren bu değişkende -900 ile -100 
 
 **EXT_SOURCE_1**
 
-![ex1](.\images\ex1.png)
+![ex1](./images/ex1.png)
 
 ###### *Çıkarımlar* : 
 
@@ -444,7 +444,7 @@ Başka kaynaklardan gelen skorları içerin bu değişkende  önemli seviyede fa
 
 **EXT_SOURCE_2**
 
-![ex2](.\images\ex2.png)
+![ex2](./images/ex2.png)
 
 ###### *Çıkarımlar* : 
 
@@ -454,7 +454,7 @@ Başka kaynaklardan gelen skorları içerin bu değişkende  önemli seviyede fa
 
 **EXT_SOURCE_3**
 
-![ext3](.\images\ext3.png)
+![ext3](./images/ext3.png)
 
 ###### *Çıkarımlar* : 
 
@@ -464,7 +464,7 @@ Başka kaynaklardan gelen skorları içerin bu değişkende  önemli seviyede fa
 
 **OWN_CAR_AGE**
 
-![own_car_age](.\images\own_car_age.png)
+![own_car_age](./images/own_car_age.png)
 
 ###### *Çıkarımlar* : 
 
