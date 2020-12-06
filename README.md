@@ -1,3 +1,7 @@
 # HomeCreditDefaultRisk
 
-hiii guys
+***Authors:***
+
+Oğuz Han Erdoğan
+
+Emre Gür
