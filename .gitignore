@@ -1,2 +1,4 @@
 data/
 .idea/
+Application/.ipynb_checkpoints/
+Application/__pycache__/
