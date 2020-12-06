@@ -10,6 +10,16 @@ Değişkeni incelendiğinde "365243" degerinin bir çok fazla sayıda girildiği
 df['DAYS_EMPLOYED'].replace(365243, np.nan, inplace=True)
 ```
 
+**CODE_GENDER**
+
+------
+
+4 gözlem değeri XNA olarak girilmiş bu durumdan kurtarıldı.
+
+```python
+df = df[df['CODE_GENDER'] != 'XNA']  
+```
+
 **OWN_CAR_AGE**  
 
 ------
@@ -24,7 +34,7 @@ df["OWN_CAR_AGE"] = df["OWN_CAR_AGE"].fillna(0)
 
 ------
 
-Değiskeni yaş değerini gün cinsinden belirtiyordu bu değişkeni 365 ' e bölerek yıl
+Değişkeni yaş değerini gün cinsinden belirtiyordu bu değişkeni 365 ' e bölerek yıl
 
 haline getirdik. Ve sonrasında oluşturduğumuz değişkenin tipini "integer" şeklinde düzenledi.
 
@@ -37,7 +47,7 @@ df["NEW_AGE"] = df["NEW_AGE"].astype("int")
 
 ------
 
-Değişkeni müşterilerinin meslek bilgilerini içinde barındıyordu bu meslekler target'a göre sınıflandırıldı.
+Değişkeni müşterilerinin meslek bilgilerini içinde barındırıyordu bu meslekler target'a göre sınıflandırıldı.
 
 ```python
 df.loc[(df["OCCUPATION_TYPE"] == "Drivers"), "OCCUPATION_TYPE"] = 1
@@ -68,7 +78,7 @@ df.loc[(df["OCCUPATION_TYPE"] == "IT staff"), "OCCUPATION_TYPE"] = 4
 
 ------
 
-Değişkeni müşterilerin eğitim bilgilerini içeriyor bu değişkeni target'a bakılarak ve birbirine yakın olanlar seçilerek sınıflandırıldı.
+Değişkeni müşterilerin eğitim bilgilerini içeriyor bu değişken target'a bakılarak ve birbirine yakın olanlar seçilerek sınıflandırıldı.
 
 ```python
 df.loc[(df["NAME_EDUCATION_TYPE"] == "Academic degree"), "NAME_EDUCATION_TYPE"] = "Higher education"
@@ -150,10 +160,6 @@ f['NEW_ANNUITY_INCOME_PERC'] = df['AMT_ANNUITY'] / df['AMT_INCOME_TOTAL']
 
 *Feature 7* : **NEW_AMT_STATUS**
 
-```
-
-```
-
 Müşterinin almak istediği ürün ile çektiği kredi arasındaki farka göre bir derecelendirme yapıldı.
 
 ```python
@@ -161,6 +167,8 @@ df.loc[(df["AMT_CREDIT"] - df["AMT_GOODS_PRICE"] > 0), "NEW_AMT_STATUS"] = 1
 df.loc[(df["AMT_CREDIT"] - df["AMT_GOODS_PRICE"] == 0), "NEW_AMT_STATUS"] = 2
 df.loc[(df["AMT_CREDIT"] - df["AMT_GOODS_PRICE"] < 0), "NEW_AMT_STATUS"] = 3
 ```
+
+Importance tablosunda etkisi neredeyse yok denecek kadar az görüldü ve çıkarıldı.
 
 *Feature 8*: **NEW_C-GP**
 
@@ -214,6 +222,8 @@ Diğer kuruluşlardan alınan skorların çarpılmasıyla elde edilir.
 df["NEW_EXT_X"] = df["EXT_SOURCE_1"] * df["EXT_SOURCE_2"] * df["EXT_SOURCE_3"]
 ```
 
+*Skora olan etkisi kontrol edildi ve çıkarıldı.
+
 *Feature 13* : **NEW_EXT_MEAN**
 
 ------
@@ -251,7 +261,9 @@ df.loc[(df["EXT_SOURCE_1"] >= 0.5) | (df["EXT_SOURCE_2"] >= 0.55) | (df["EXT_SOU
     df.loc[(df["EXT_SOURCE_1"] < 0.5) | (df["EXT_SOURCE_2"] < 0.55) | (df["EXT_SOURCE_3"] < 0.45), "NEW_BOMB"] = 1
 ```
 
-*Feature 16* : **DOCUMENT_COUNT**  **New 
+*Kontroller yapıldıktan sonra çıkarıldı.
+
+*Feature 16* : **NEW_DOCUMENT_COUNT**  
 
 ------
 
@@ -279,6 +291,8 @@ Oluşturalan değişken "integer" hale getirildi ve sonra eski değişken silind
 df["NEW_AGE_RANK"] = df["NEW_AGE_RANK"].astype("int")
 df.drop("NEW_AGE", axis=1, inplace=True)
 ```
+
+*Üretilen bu değişkenin de etkileri beğenilmedi ve çıkarıldı.
 
 *Feature 18* : **NEW_PHONE_TO_BIRTH_RATIO**
 
@@ -311,3 +325,68 @@ INC_ORG =
 df[['AMT_INCOME_TOTAL','ORGANIZATION_TYPE']].groupby('ORGANIZATION_TYPE').median()['AMT_INCOME_TOTAL']
 df['NEW_INC_ORG'] = df['ORGANIZATION_TYPE'].map(INC_ORG)
 ```
+
+*Feature 21* : **NEW_EXT_WEIGHTED**
+
+Kredi notlarının target'a etkilerine göre şekillendirilmesi.
+
+```python
+df['NEW_EXT_WEIGHTED'] = df.EXT_SOURCE_1 * 2 + df.EXT_SOURCE_2 * 1 + df.EXT_SOURCE_3 * 3
+```
+
+*Feature 22* : **NEW_PHONE_TO_BIRTH_RATIO**
+
+Son telefon değiştirme tarihinin yaşına oranıyla elde edilir.
+
+```python
+df['NEW_PHONE_TO_BIRTH_RATIO'] = df['DAYS_LAST_PHONE_CHANGE'] / df['DAYS_BIRTH']
+```
+
+*Feature 23* : **NEW_PHONE_TO_BIRTH_RATIO_EMPLOYER**
+
+Telefon değiştirme tarihinin işe başladığı tarihe oranıyla elde edilir.
+
+```python
+df['NEW_PHONE_TO_BIRTH_RATIO_EMPLOYER'] = df['DAYS_LAST_PHONE_CHANGE'] / df['DAYS_EMPLOYED']
+```
+
+*Feature 24* : **NEW_PHO/ANNU**
+
+Telefon değiştirme tarihinin yıllık kredi ödemesine oranıyla elde edilir.
+
+```python
+df['NEW_PHO/ANNU'] = df['DAYS_LAST_PHONE_CHANGE'] / df['AMT_ANNUITY']
+```
+
+*Feature 25* : **NEW_PHO/REG**
+
+Telefon değiştirme tarihinin kaydını değiştirme tarihine oranıyla elde edilir.
+
+```python
+df["NEW_PHO/REG"] = df['DAYS_LAST_PHONE_CHANGE'] * df["DAYS_REGISTRATION"]
+```
+
+*Feature 26* : **NEW_FRAUD**
+
+Ürettiğimiz değişken ile adres uyumsuzluklarının çarpımları ile elde edilir.
+
+```python
+f["NEW_FRAUD_1"] = df["REG_CITY_NOT_LIVE_CITY"] + df["REG_CITY_NOT_WORK_CITY"] + df["LIVE_CITY_NOT_WORK_CITY"]
+```
+
+```python
+df["NEW_FRAUD"] = (df["NEW_FRAUD_1"] + 1) * df["DAYS_ID_PUBLISH"]
+```
+
+```python
+del df["NEW_FRAUD_1"]
+```
+
+*Feature 27* : **NEW_FRAUD_STD**
+
+Dolandırıcılığı bulmaya çalıştığımız değişkenin std'si alındı.
+
+```python
+df["NEW_FRAUD_std"] = (df[["REG_CITY_NOT_LIVE_CITY", "REG_CITY_NOT_WORK_CITY", "LIVE_CITY_NOT_WORK_CITY"]]).std(axis=1)
+```
+

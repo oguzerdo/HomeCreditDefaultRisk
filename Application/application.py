@@ -44,7 +44,10 @@ df = df.append(test_df).reset_index()
 
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3eda5a613b089c281b731207ea72c47ba12c511f
 # DATA PREPROCESSING
 df = df[df['CODE_GENDER'] != 'XNA']  # 4 gözlem değeri XNA olarak girilmiş bundan kurtarıldı.
 df['DAYS_EMPLOYED'].replace(365243, np.nan, inplace=True)  # NaN değerleri 365243 olarak girilmiş, onlar düzeltildi
