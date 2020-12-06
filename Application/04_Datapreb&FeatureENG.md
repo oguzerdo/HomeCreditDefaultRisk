@@ -389,4 +389,3 @@ Dolandırıcılığı bulmaya çalıştığımız değişkenin std'si alındı.
 ```python
 df["NEW_FRAUD_std"] = (df[["REG_CITY_NOT_LIVE_CITY", "REG_CITY_NOT_WORK_CITY", "LIVE_CITY_NOT_WORK_CITY"]]).std(axis=1)
 ```
-
