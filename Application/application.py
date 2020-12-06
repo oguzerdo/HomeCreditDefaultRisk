@@ -84,11 +84,10 @@ df['NEW_EXT_WEIGHTED'] = df.EXT_SOURCE_1 * 2 + df.EXT_SOURCE_2 * 1 + df.EXT_SOUR
 
 #################
 np.warnings.filterwarnings('ignore', r'All-NaN (slice|axis) encountered')
-    for function_name in ['min', 'max', 'mean', 'nanmedian', 'var']:
-        feature_name = 'EXT_SOURCES_{}'.format(function_name.upper())
-        df["NEW_" + feature_name] = eval('np.{}'.format(function_name))(
-            df[['EXT_SOURCE_1', 'EXT_SOURCE_2', 'EXT_SOURCE_3']], axis=1)
-
+for function_name in ['min', 'max', 'mean', 'nanmedian', 'var']:
+    feature_name = 'EXT_SOURCES_{}'.format(function_name.upper())
+    df["NEW_" + feature_name] = eval('np.{}'.format(function_name))(df[['EXT_SOURCE_1', 'EXT_SOURCE_2', 'EXT_SOURCE_3']], axis=1)
+################
 
 # FEATURE 14 - DOKUMANLARIN TOPLAMI / DOCS ATILDI
 docs = [f for f in df.columns if 'FLAG_DOC' in f]
