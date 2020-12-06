@@ -43,7 +43,7 @@ Birbirine yakın sınıflar var ve çeşitlilik yok düzenlenebilir veya atılab
 
 ---
 
-**NAME_INCOME_TYPE**
+**NAME_INCOME_TYPE** : Kredi başvurusunda bulunurken müşteriye kim eşlik ediyordu?
 
 ```
 NAME_INCOME_TYPE : has 8 unique category 	- object
@@ -61,7 +61,7 @@ Working                         158774  307511 51.632        0.096
 
 ###### *Çıkarımlar* : 
 
-Çok düşük gözlemlenen sınıflar var düzeltilmeli.
+Atılabilir.
 
 ---
 
