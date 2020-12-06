@@ -109,6 +109,13 @@ def cat_summary(dataframe,categorical_cols, target, noc=10):
     print('Variable names have more than %d classes:' % noc, end="\n\n")
     print(vars_more_classes)
 
+def cat_summary2(dataframe,target,target2):
+    print("CATEGORICAL FEATURE ANALYSIS",end="\n\n")
+    print(target2, ": has",dataframe[target2].nunique(), "unique category","\t-",str(dataframe[target2].dtypes),end="\n\n")
+    print(pd.DataFrame({target2: dataframe[target2].value_counts(),
+                        "Ratio": 100 * dataframe[target2].value_counts() / len(dataframe),
+                        "TARGET_MEAN": dataframe.groupby(target2)[target].mean()}),end="\n\n\n")
+
 
 def num_summary(dataframe, num_cols, target):
     for col in num_cols:
@@ -170,3 +177,4 @@ def one_hot_encoder(dataframe, category_freq=10, nan_as_category=False):
     dataframe = pd.get_dummies(dataframe, columns=categorical_cols, dummy_na=nan_as_category, drop_first=True)
 
     return dataframe
+
