@@ -217,7 +217,7 @@ def rare_analyser(dataframe, target, rare_perc):
                             "RATIO": dataframe[var].value_counts() / len(dataframe),
                             "TARGET_MEDIAN": dataframe.groupby(var)[target].median()}), end="\n\n\n")
 
-df = rare_encoder(df, 0.10)
+df = rare_encoder(df, 0.05)
 
 
 def label_encoder(dataframe, categorical_columns):
