@@ -11,8 +11,8 @@
 
 # Bureau 
 
-- [ ] EDA Raporu
-- [ ] Feature Analysis
+- [x] EDA Raporu
+- [x] Feature Analysis
 - [ ] Feature Engineering
 - [ ] Düzenlemeler sonrası model
 - [ ] Feature Importance
