@@ -384,7 +384,7 @@ del df["NEW_FRAUD_1"]
 
 *Feature 27* : **NEW_FRAUD_STD**
 
-Dolandırıcılığı bulmaya çalıştığımız değişkenin std'si alındı.
+Dolandırıcılığı bulmaya çalıştığımız değişkenin standart sapması alındı.
 
 ```python
 df["NEW_FRAUD_std"] = (df[["REG_CITY_NOT_LIVE_CITY", "REG_CITY_NOT_WORK_CITY", "LIVE_CITY_NOT_WORK_CITY"]]).std(axis=1)
