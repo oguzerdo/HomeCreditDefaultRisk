@@ -273,3 +273,4 @@ Peşinatın maaşa oranı ile elde edilir.
 prev["NEW_PAY_ANN/DOWN_PERC"] = prev["AMT_ANNUITY"] / prev["AMT_DOWN_PAYMENT"]
 ```
 
+s
