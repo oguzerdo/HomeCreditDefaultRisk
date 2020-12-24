@@ -1,16 +1,15 @@
 import pandas as pd
-
-
-
-
+from sklearn import preprocessing
 
 # One-hot encoding for categorical columns with get_dummies
+
 def one_hot_encoder(df, nan_as_category=True):
     original_columns = list(df.columns)
     categorical_columns = [col for col in df.columns if df[col].dtype == 'object']
     df = pd.get_dummies(df, columns=categorical_columns, dummy_na=nan_as_category)
     new_columns = [c for c in df.columns if c not in original_columns]
     return df, new_columns
+
 
 # command line access for debuging
 def get_namespace():
@@ -26,7 +25,7 @@ def get_namespace():
 def i_love_ds():
     print('\n'.join([''.join([(' I_Love_Data_Science_'[(x - y) % len('I_Love_Data_Science_')]
                                if ((x * 0.05) ** 2 + (y * 0.1) ** 2 - 1) ** 3 - (x * 0.05) ** 2 * (
-                y * 0.1) ** 3 <= 0 else ' ')
+            y * 0.1) ** 3 <= 0 else ' ')
                               for x in range(-30, 30)]) for y in range(15, -15, -1)]))
 
 
@@ -49,13 +48,28 @@ def display_importances(feature_importance_df_):
 # missing values
 
 def missing_values(df):
-
     cols_with_na = [col for col in df.columns if df[col].isnull().sum() > 0]
     for col in cols_with_na:
         print(col, np.round(df[cols_with_na].isnull().mean(), 3), " % missing values")
 
 
-        
+# label encoder
+
+def label_encoder(dataframe, categorical_columns):
+    """
+    2 sınıflı kategorik değişkeni 0-1 yapma
+    :param dataframe: İşlem yapılacak dataframe
+    :param categorical_columns: Label encode yapılacak kategorik değişken adları
+    :return:
+    """
+    labelencoder = preprocessing.LabelEncoder()
+
+    for col in categorical_columns:
+        if dataframe[col].nunique() == 2:
+            dataframe[col] = labelencoder.fit_transform(dataframe[col])
+    return dataframe
+
+
 # saving models
 def saving_models():
     import os
