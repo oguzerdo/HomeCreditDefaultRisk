@@ -13,8 +13,8 @@
 
 - [x] EDA Raporu
 - [x] Feature Analysis
-- [ ] Feature Engineering
-- [ ] Düzenlemeler sonrası model
+- [x] Feature Engineering
+- [x] Düzenlemeler sonrası model
 - [ ] Feature Importance
 
 
