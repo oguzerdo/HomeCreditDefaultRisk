@@ -1,58 +1,8 @@
-
-
-![](./images/header.png)
-
-
-
-#             Home Credit Default Risk
-
-- Bu çalışma da Kaggle'da bulunan Ev Kredisi temerrüt riskini değerlendiren makine öğrenimi algoritmaları üreteceğiz. Bu çalışmanın amacı, bir başvuru sahibinin bir krediyi geri ödeyip ödeyemeyeceğini tahmin etmek için geçmiş kredi başvuru verilerini kullanmaktır.
-  - Amacımız :  Geçmiş verileri kullanarak gelecekteki durumu tahmin etmeyi öğrenmek için bir model eğitmektir.
-  - Sınıflandırma: Hedef  iki sınıfı olan bir değişkendir, 0 (krediyi zamanında geri ödeyecek), 1 (krediyi geri ödemekte zorluk çekecek) (TARGET)
-
-
-
-#   **Bureu**
-
-Bureau data seti ; müşterinin diğer finans kuruluşlarından önceki kredileriyle ilgili verileri içerisinde barındırır. Her bir kredinin büroda kendi satırı vardır, ancak başvuru verilerindeki bir kredinin birden fazla eski kredisi olabilir.
-
-
-
-# **MISSING VALUES**
-
-| Missing Values         | % of Total Values |        |
-| ---------------------- | ----------------- | ------ |
-| AMT_ANNUITY            | 1226791           | 71.500 |
-| AMT_CREDIT_MAX_OVERDUE | 1124488           | 65.500 |
-| DAYS_ENDDATE_FACT      | 633653            | 36.900 |
-| AMT_CREDIT_SUM_LIMIT   | 591780            | 34.500 |
-| AMT_CREDIT_SUM_DEBT    | 257669            | 15.000 |
-| DAYS_CREDIT_ENDDATE    | 105553            | 6.100  |
-| AMT_CREDIT_SUM         | 13                | 0.000  |
-
-
-
-**DAYS_CREDIT**
-
-------
-
-Müsteri mevcut başvurudan kaç gün önce Kredi bürosuna başvurdu.(Başka bir kredi için)(Gün bazlı değişken)
-
-min değerimiz 2922 ve bu değer 8 yıla tekabül ediyor.
-
-
+# Data Preprocessing
 
 **CREDIT_CURRENCY**
 
 ------
-
-Kredi bürosunun kredisinin yeniden kodlanmış para birimi şeklinde tanımlanıyor.
-
-4 adet alt grubu var bunlar : 
-
-```
-currency 1 , currency 2 , currency 3 , currency 4  
-```
 
 Kategorilerdeki gözlem sayıları düşük oldugu için  0 ve 1 şeklinde ayarlandı.
 
@@ -66,8 +16,6 @@ df.loc[(df["CREDIT_CURRENCY"] == "currency 4"),"CREDIT_CURRENCY"] = 1 "Current 4
 **CREDIT_ACTIVE**
 
 ------
-
-Durumu bildirilen krediler  **Closed** , **Active** , **Sold** , **Bad Deb**t şeklinde alt kümelere sahip.
 
 Bu değişkende **Sold** ve **Bad Debt**  sınıfları verisetinde az olmasından dolayı anlamlı bir farklılık sağlamıyor bu sebeple **Active** olarak atandı.
 
@@ -134,102 +82,6 @@ bureau.loc[(bureau["CREDIT_TYPE"] == "Unknown type of loan"),"CREDIT_TYPE"] = "R
 bureau.loc[(bureau["CREDIT_TYPE"] == "Cash loan (non-earmarked)"),"CREDIT_TYPE"] = "Rare"
 bureau.loc[(bureau["CREDIT_TYPE"] == "Real estate loan"),"CREDIT_TYPE"] = "Rare"
 bureau.loc[(bureau["CREDIT_TYPE"] == "Loan for the purchase of equipment"),"CREDIT_TYPE"] = "Rare"
-```
-
-
-
-**CREDIT_DAY_OVERDUE**
-
-------
-
-Müşterinin diğer kredilerini geciktirme durumlarını gün olarak ifade ediyor
-
-```
-0: geciktirmemiş 1: geciktirmiş olarak kodlanabilir
-```
-
-**UYGULANMADI**
-
-
-
-**DAYS_CREDİT_ENDDATE **
-
-------
-
-Kredi başvurusundan kaç gün önce önceki kredisinin bittiği ya da kaç günleri kaldıgı bilgisini verir.
-
-Yapılan sektör araştırmalarına göre dünya da en uzun görülen kredi türü olan mortgage da 50 yıl saptanmıştır oguz bey tarafından.
-
-En yaşlı başvuran kişi 69 yaşındadır. Bu kişi 18 yaşında krediye başvurmuş olsa dahi 50 yıllık ödemeyi karsılayabilecek yaş seviyesindedir. Bunu göz önünde bulundurarak days credit değişkeninde max sınırımızı 50 yıl olarak alacağız. 50 yıldan uzun olan verileri atacağız.
-
-0 dan geriye gidenler  ödemesini tamamlayan kitleyi oluşturur. Credit_Active durumları : CLOSED
-
-0 dan pozitif yönde hareket edenlerin ödemesi devam etmektedir. Credit_Active durumları : ACTIVE
-
-
-
-**DAYS_ENDDATE_FACT**
-
-------
-
-Ev kredisi başvurusu sırasında Credi bürosunda bulunan eski kredisinin sona ermesinden bu yana geçen süre gün cinsinden ( Yalnızca kapalı kredi ). Maximum değer 0 gorüldü bunun sebesi ise yalnızca kapalı olan yani ödemesi sone ermiş kredilerin bu değişkende yer alması.
-
-Days_credit_enddate ve days_enddate_fact değigskenlerinde minumum değerlerin -42023  (115 yıla yakın bir değere tekabül ediyor.)(oldugu tespit edilmiş ve bu değere gürültü adı verilmiştir.
-
-
-
-**AMT_CREDIT_OVERDUE**
-
-------
-
-Kredi bürosu  bulunan kredisinde su ana kadar gecikmiş maksimum kredi tutarı(Home Credit Kredi basvuru tarihine kadar)
-
-Eksik değerler denklem dısında tutuldugunda (112.000)
-
-None değerlere mantıklı olması sesebi ile 0 atandı bu durum model olusturulduktan sonra kontrol edilecek.
-
-Değişken incelendiğinde  müşterilerin %75 inin gecikmis kredi ödemesi bulunmamakta. Gecikmis olanları ise geciktirilmiş miktarlarına göre sınıflandırabiliriz.
-
-%99 dan büyük olan dilim incelendiğinde en düşük borç tutarı 41.989 oldugu görüldü.En yüksek tutar ise 115.987.185 oldugu görüldü.
-
-Yeni bir "Danger " sınıfı oluşturduk . Bu sınıfa Label Encoding uygulayarak elde ettiğimiz verileri yerleştireceğiz. 0,1,2,3
-
-0=Gecikmis Borcu Olmayan
-
-1=100.000' e kadar gecikmis baska kredi borcu olanlar
-
-2=100.000'den 500.000'e kadar gecikmis baska kredi borcu olanlar
-
-3=500.000'den fazla gecikmis kredi borcu olanlar
-
-nan değerler borcu yok diye değerlendirildi. model sonucuna göre kontrol edilecek.
-
-```python
-bureau["AMT_CREDIT_MAX_OVERDUE"] = bureau["AMT_CREDIT_MAX_OVERDUE"].fillna(0) 
-```
-
-Gecikmiş borcu olmayanlar
-
-```python
-bureau.loc[((bureau["AMT_CREDIT_MAX_OVERDUE"] >= 0) | (bureau["AMT_CREDIT_SUM_OVERDUE"] >= 0)), "NEW_DANGER"] = 0
-```
-
- 100.000'e kadar gecikmiş (başka) kredi borcu olanlar
-
-```python
-bureau.loc[((bureau["AMT_CREDIT_MAX_OVERDUE"] >= 1) | (bureau["AMT_CREDIT_SUM_OVERDUE"] >= 1)), "NEW_DANGER"] = 1
-```
-
-100.000'den 500000'e kadar gecikmiş (başka) kredi borcu olanlar
-
-```python
-bureau.loc[((bureau["AMT_CREDIT_MAX_OVERDUE"] >= 100000) | (bureau["AMT_CREDIT_SUM_OVERDUE"] >= 100000)), "DANGER"] = 2 
-```
-
-500.000 den fazla gecikmiş borcu olup hayal kuranlar
-
-```python
-bureau.loc[((bureau["AMT_CREDIT_MAX_OVERDUE"] >= 500000) | (bureau["AMT_CREDIT_SUM_OVERDUE"] >= 500000)), "NEW_DANGER"] = 3 
 ```
 
 
