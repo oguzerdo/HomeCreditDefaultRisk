@@ -6,7 +6,7 @@ NAME_CONTRACT_TYPE
 
 Önceki başvurunun sözleşme ürün türü (Nakit kredi, tüketici kredisi [POS], ...)
 
-```
+```python
                     NAME_CONTRACT_TYPE    Count      Ratio  TARGET_MEAN
 NAME_CONTRACT_TYPE                                                     
 Cash loans                      747553  1670214  44.757917     0.581255
@@ -15,7 +15,7 @@ Revolving loans                 193164  1670214  11.565225     0.493819
 XNA                                346  1670214   0.020716     1.000000
 ```
 
-*Çıkarımlar* : 
+*Çıkarımlar* : Consumer loans olanların temerrüte düşme oranlarının azlığı dikkat çekiyor.
 
 
 
@@ -23,7 +23,7 @@ WEEKDAY_APPR_PROCESS_START
 
 Müşteri önceki başvuru için haftanın hangi gününde başvurdu?
 
-```
+```python
      WEEKDAY_APPR_PROCESS_START    Count      Ratio  TARGET_MEAN
 FRIDAY                         252048  1670214  15.090761     0.377579
 MONDAY                         253557  1670214  15.181109     0.395386
@@ -42,7 +42,7 @@ FLAG_LAST_APPL_PER_CONTRACT
 
 Önceki sözleşme için son başvuru ise işaretleyin. Bazen müşterimizin veya katibimizin yanlışlıkla tek bir sözleşme için daha fazla başvuru olabilir.
 
-```
+```python
 FLAG_LAST_APPL_PER_CONTRACT    Count     Ratio  TARGET_MEAN
 N                         8475  1670214   0.50742     1.000000
 Y                      1661739  1670214  99.49258     0.360178
@@ -70,7 +70,7 @@ NAME_PAYMENT_TYPE
 
 Müşterinin önceki uygulama için ödemeyi seçtiği ödeme yöntemi
 
-```
+```python
 NAME_PAYMENT_TYPE    Count  \
 Cash through the bank                                1033552  1670214   
 Cashless from the account of the employer               1085  1670214   
@@ -84,7 +84,7 @@ Non-cash from your account                  0.490536     0.149152
 XNA                                        37.563091     0.661577  
 ```
 
-*Çıkarımlar* : 
+*Çıkarımlar* : Ratiosu düşük iki değerin target değerleri birbirine yakın gruplandırılması değerlendirilebilir.
 
 
 
@@ -92,7 +92,7 @@ CODE_REJECT_REASON
 
 Önceki başvuru neden reddedildi
 
-```
+```python
  CODE_REJECT_REASON    Count      Ratio  TARGET_MEAN
 CLIENT               26436  1670214   1.582791     0.000000
 HC                  175231  1670214  10.491530     1.000000
@@ -105,7 +105,7 @@ XAP                1353093  1670214  81.013152     0.233776
 XNA                   5244  1670214   0.313972     0.998474
 ```
 
-*Çıkarımlar* : 
+*Çıkarımlar* : Temerrüte düşenler gruplanabilir. Feature importance tablosuna bakarak değerlendirilecek.
 
 
 
@@ -113,7 +113,7 @@ NAME_TPYE_SUITE
 
 Önceki başvuru için başvururken müşteriye kim eşlik etti
 
-```
+```python
 NAME_TYPE_SUITE : has 7 unique category 	- object
 
                  NAME_TYPE_SUITE    Count      Ratio  TARGET_MEAN
@@ -135,7 +135,7 @@ NAME_CLIENT_TYPE
 
 Önceki uygulama için başvururken müşteri eski mi yoksa yeni müşteri miydi
 
-```
+```python
 NAME_CLIENT_TYPE : has 4 unique category 	- object
 
            NAME_CLIENT_TYPE    Count      Ratio  TARGET_MEAN
@@ -145,7 +145,7 @@ Repeater            1231261  1670214  73.718757     0.449208
 XNA                    1941  1670214   0.116213     0.685214
 ```
 
-*Çıkarımlar* :  
+*Çıkarımlar* :  Yeni müşterilerin temerrüte düşme oranı düşük.
 
 
 
@@ -153,7 +153,7 @@ NAME_PORTFOLIO
 
 Önceki NAKİT, POS, ARAÇ,… uygulamasıydı.
 
-```
+```python
 NAME_PORTFOLIO : has 5 unique category 	- object
 
        NAME_PORTFOLIO    Count      Ratio  TARGET_MEAN
@@ -172,7 +172,7 @@ NAME_PRODUCT_TYPE
 
 Önceki uygulama x-sell o walk-in miydi
 
-```
+```python
 NAME_PRODUCT_TYPE : has 3 unique category 	- object
 
          NAME_PRODUCT_TYPE    Count      Ratio  TARGET_MEAN
@@ -181,7 +181,7 @@ walk-in             150261  1670214   8.996512     0.516455
 x-sell              456287  1670214  27.319074     0.260003
 ```
 
-*Çıkarımlar* : 
+*Çıkarımlar* : Na değerlerin fazla olduğu görülüyor.
 
 
 
@@ -189,7 +189,7 @@ CHANNEL_TYPE
 
 Önceki uygulamanın müşterisinin satış alanı
 
-```
+```python
 CHANNEL_TYPE : has 8 unique category 	- object
 
                             CHANNEL_TYPE    Count      Ratio  TARGET_MEAN
@@ -211,7 +211,7 @@ NAME_YIELD_GROUP
 
 Faiz oranı, önceki uygulamanın küçük orta ve yüksek olarak gruplandırılması
 
-```
+```python
 NAME_YIELD_GROUP : has 5 unique category 	- object
 
             NAME_YIELD_GROUP    Count      Ratio  TARGET_MEAN
@@ -230,7 +230,7 @@ NFLAG_INSURED_ON_APPROVAL
 
 Müşteri önceki başvuru sırasında sigorta talep etti mi?
 
-```
+```python
 NFLAG_INSURED_ON_APPROVAL : has 2 unique category 	- float64
 
      NFLAG_INSURED_ON_APPROVAL    Count     Ratio  TARGET_MEAN
@@ -251,7 +251,7 @@ DAYS_DECİSİON
 
 ![](.\images\days_desicion.png)
 
-*Çıkarımlar* : 
+*Çıkarımlar* : -500 den büyük değerlerin temerrüte düşme oranları yüksek .
 
 
 
@@ -259,7 +259,7 @@ CNT_PAYMENT
 
 ![](.\images\cnt_payment.png)
 
-*Çıkarımlar* : 
+*Çıkarımlar* : 5 ila 15 değerleri arasında temerrüte düşmeme durumunda ki olumlu farklılık gözlemlendi.
 
 
 
@@ -267,7 +267,7 @@ DAYS_FIRST_DRAWING
 
 ![](.\images\days_first_drawing.png)
 
-*Çıkarımlar* : 
+*Çıkarımlar* :  365.000 civarında'  ki değerlerin gün olarak bakıldığında anlamsiz olduğu görülüyor bu değerlere nan atamak mantıklı olacaktır.
 
 
 
@@ -275,7 +275,7 @@ DAYS_FIRST_DUE
 
 ![](.\images\days_fırst_due.png)
 
-*Çıkarımlar* : 
+*Çıkarımlar* : 365.000 civarında'  ki değerlerin gün olarak bakıldığında anlamsiz olduğu görülüyor bu değerlere nan atamak mantıklı olacaktır.
 
 
 
@@ -283,7 +283,7 @@ DAYS_LAST_DUE_1ST_VERSION
 
 ![](.\images\days_last_due_1st_version.png)
 
-*Çıkarımlar* : 
+*Çıkarımlar* : 365.000 civarında'  ki değerlerin gün olarak bakıldığında anlamsiz olduğu görülüyor bu değerlere nan atamak mantıklı olacaktır.
 
 
 
@@ -291,10 +291,13 @@ DAYS_LAST_DUE
 
 ![](.\images\days_last_due.png)
 
-*Çıkarımlar* : 
+*Çıkarımlar* : 365.000 civarında'  ki değerlerin gün olarak bakıldığında anlamsiz olduğu görülüyor bu değerlere nan atamak mantıklı olacaktır.
 
 
 
 DAYS_TERMINATION
 
 ![](.\images\days_termination.png)
+
+*Çıkarımlar* : 365.000 civarında'  ki değerlerin gün olarak bakıldığında anlamsiz olduğu görülüyor bu değerlere nan atamak mantıklı olacaktır.
+
