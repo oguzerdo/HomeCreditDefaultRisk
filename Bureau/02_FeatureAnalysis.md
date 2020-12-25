@@ -24,7 +24,7 @@ Müsteri mevcut başvurudan kaç gün önce Kredi bürosuna başvurdu.(Başka bi
 
 min değerimiz 2922 ve bu değer 8 yıla tekabül ediyor.
 
-![](.\images\days_credit.png)
+![](./images/days_credit.png)
 
 -1000 günden yüksek değerlerde farklılık gözlemlendi.
 
