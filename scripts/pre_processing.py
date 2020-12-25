@@ -254,22 +254,22 @@ def bureau_and_balance(num_rows=None, nan_as_category=True):
     del bureau['CREDIT_ACTIVE_BINARY']  # gereksiz olan sütun atıldı
     gc.collect()
 
-    # FEATURE 5: NEW_DAYS_DIFF | Bir kişi kaç gün aralıkla yeni krediler almış
-    # Bir kişinin almış olduğu farklı kredileri alma günleri sıralandı
-    grp = bureau[['SK_ID_CURR', 'SK_ID_BUREAU', 'DAYS_CREDIT']].groupby(by=['SK_ID_CURR'])
-    grp1 = grp.apply(lambda x: x.sort_values(['DAYS_CREDIT'], ascending=False)).reset_index(
-        drop=True)  # rename(index = str, columns = {'DAYS_CREDIT': 'DAYS_CREDIT_DIFF'})
-    print("Grouping and Sorting done")
-    grp1['DAYS_CREDIT1'] = grp1['DAYS_CREDIT'] * -1  # günler - olarak getirildiğinden + yapıldı
-    grp1['NEW_DAYS_DIFF'] = grp1.groupby(by=['SK_ID_CURR'])[
-        'DAYS_CREDIT1'].diff()  # aldığı farklı krediler arasında kaçar gün olduğu hesaplandı
-    grp1['NEW_DAYS_DIFF'] = grp1['NEW_DAYS_DIFF'].fillna(0).astype(
-        'uint32')  # ilk değişkende nan geleceği için 0 ile doldurdum. diff fonksiyonunda 2. değerden 1. değer çıkarılıyor. bu sebeple ilk değerde nan geliyor.
-    del grp1['DAYS_CREDIT1'], grp1['DAYS_CREDIT'], grp1['SK_ID_CURR']  # gereksiz columnlar atıldı
-    print("Difference days calculated")
-    # ana tablo ile birleştirme işlemleri
-    bureau = bureau.merge(grp1, on=['SK_ID_BUREAU'], how='left')
-    print("Difference in Dates between Previous CB applications is CALCULATED ")
+    # # FEATURE 5: NEW_DAYS_DIFF | Bir kişi kaç gün aralıkla yeni krediler almış
+    # # Bir kişinin almış olduğu farklı kredileri alma günleri sıralandı
+    # grp = bureau[['SK_ID_CURR', 'SK_ID_BUREAU', 'DAYS_CREDIT']].groupby(by=['SK_ID_CURR'])
+    # grp1 = grp.apply(lambda x: x.sort_values(['DAYS_CREDIT'], ascending=False)).reset_index(
+    #     drop=True)  # rename(index = str, columns = {'DAYS_CREDIT': 'DAYS_CREDIT_DIFF'})
+    # print("Grouping and Sorting done")
+    # grp1['DAYS_CREDIT1'] = grp1['DAYS_CREDIT'] * -1  # günler - olarak getirildiğinden + yapıldı
+    # grp1['NEW_DAYS_DIFF'] = grp1.groupby(by=['SK_ID_CURR'])[
+    #     'DAYS_CREDIT1'].diff()  # aldığı farklı krediler arasında kaçar gün olduğu hesaplandı
+    # grp1['NEW_DAYS_DIFF'] = grp1['NEW_DAYS_DIFF'].fillna(0).astype(
+    #     'uint32')  # ilk değişkende nan geleceği için 0 ile doldurdum. diff fonksiyonunda 2. değerden 1. değer çıkarılıyor. bu sebeple ilk değerde nan geliyor.
+    # del grp1['DAYS_CREDIT1'], grp1['DAYS_CREDIT'], grp1['SK_ID_CURR']  # gereksiz columnlar atıldı
+    # print("Difference days calculated")
+    # # ana tablo ile birleştirme işlemleri
+    # bureau = bureau.merge(grp1, on=['SK_ID_BUREAU'], how='left')
+    # print("Difference in Dates between Previous CB applications is CALCULATED ")
 
     # FEATURE 6: NEW_CREDIT_ENDDATE_PERCENTAGE | ÖDEMESİ DEVAM EDEN KREDİ SAYISI ORTALAMASI
     bureau.loc[bureau['DAYS_CREDIT_ENDDATE'] < 0, "CREDIT_ENDDATE_BINARY"] = 0  # ödemesi bitmiş (Closed) krediler
@@ -283,32 +283,32 @@ def bureau_and_balance(num_rows=None, nan_as_category=True):
     bureau["NEW_AMT_PER_PAY"] = 1 - (
                 (bureau["AMT_CREDIT_SUM"] - bureau["AMT_CREDIT_SUM_DEBT"]) / bureau["AMT_CREDIT_SUM"])
 
-    # FEATURE 8: DAYS_ENDDATE_DIFF | Ödenmemiş krediler arasındaki gün farkları
-    # NOT: Groupby aggregation işleminde mean ve sum alınabilir
-    bureau['CREDIT_ENDDATE_BINARY'] = bureau['DAYS_CREDIT_ENDDATE']
-    # Ödemesi devam edenler(+) ve ödemesi bitmiş olanlar(0 veya -) değerler belirtiliyor
-    bureau.loc[(bureau["DAYS_CREDIT_ENDDATE"] <= 0), "CREDIT_ENDDATE_BINARY"] = 0  # ödemesi bitmiş (Closed) krediler
-    bureau.loc[(bureau["DAYS_CREDIT_ENDDATE"] > 0), "CREDIT_ENDDATE_BINARY"] = 1  # ödemesi devam eden (Active) krediler
-    # Ödemesi devam eden krediler üzerinde işlem yapılacak
-    B1 = bureau[bureau['CREDIT_ENDDATE_BINARY'] == 1]
-    del bureau["CREDIT_ENDDATE_BINARY"]
-
-    # Ödemesi tamamlanmaya krediler arasındaki gün farklarının hesaplanması
-    # Create Dummy Column for CREDIT_ENDDATE
-    B1['DAYS_CREDIT_ENDDATE1'] = B1['DAYS_CREDIT_ENDDATE']
-    # Groupby Each Customer ID
-    grp = B1[['SK_ID_CURR', 'SK_ID_BUREAU', 'DAYS_CREDIT_ENDDATE1']].groupby(by=['SK_ID_CURR'])
-    # Kredi ödeme sürelerinin kişi özelinde küçükten büyüğe sıralanması
-    grp1 = grp.apply(lambda x: x.sort_values(['DAYS_CREDIT_ENDDATE1'], ascending=True)).reset_index(drop=True)
-    del grp
-    gc.collect()
-    print("Grouping and Sorting done")
-    # diff fonksiyonunda ilk satırlarda gelen nan valuler 0 ile dolduruldu.
-    grp1['DAYS_ENDDATE_DIFF'] = grp1.groupby(by=['SK_ID_CURR'])['DAYS_CREDIT_ENDDATE1'].diff()
-    grp1['DAYS_ENDDATE_DIFF'] = grp1['DAYS_ENDDATE_DIFF'].fillna(0).astype('uint32')
-    del grp1['DAYS_CREDIT_ENDDATE1'], grp1['SK_ID_CURR']
-    gc.collect()
-    print("Difference days calculated")
+    # # FEATURE 8: DAYS_ENDDATE_DIFF | Ödenmemiş krediler arasındaki gün farkları
+    # # NOT: Groupby aggregation işleminde mean ve sum alınabilir
+    # bureau['CREDIT_ENDDATE_BINARY'] = bureau['DAYS_CREDIT_ENDDATE']
+    # # Ödemesi devam edenler(+) ve ödemesi bitmiş olanlar(0 veya -) değerler belirtiliyor
+    # bureau.loc[(bureau["DAYS_CREDIT_ENDDATE"] <= 0), "CREDIT_ENDDATE_BINARY"] = 0  # ödemesi bitmiş (Closed) krediler
+    # bureau.loc[(bureau["DAYS_CREDIT_ENDDATE"] > 0), "CREDIT_ENDDATE_BINARY"] = 1  # ödemesi devam eden (Active) krediler
+    # # Ödemesi devam eden krediler üzerinde işlem yapılacak
+    # B1 = bureau[bureau['CREDIT_ENDDATE_BINARY'] == 1]
+    # del bureau["CREDIT_ENDDATE_BINARY"]
+    #
+    # # Ödemesi tamamlanmaya krediler arasındaki gün farklarının hesaplanması
+    # # Create Dummy Column for CREDIT_ENDDATE
+    # B1['DAYS_CREDIT_ENDDATE1'] = B1['DAYS_CREDIT_ENDDATE']
+    # # Groupby Each Customer ID
+    # grp = B1[['SK_ID_CURR', 'SK_ID_BUREAU', 'DAYS_CREDIT_ENDDATE1']].groupby(by=['SK_ID_CURR'])
+    # # Kredi ödeme sürelerinin kişi özelinde küçükten büyüğe sıralanması
+    # grp1 = grp.apply(lambda x: x.sort_values(['DAYS_CREDIT_ENDDATE1'], ascending=True)).reset_index(drop=True)
+    # del grp
+    # gc.collect()
+    # print("Grouping and Sorting done")
+    # # diff fonksiyonunda ilk satırlarda gelen nan valuler 0 ile dolduruldu.
+    # grp1['DAYS_ENDDATE_DIFF'] = grp1.groupby(by=['SK_ID_CURR'])['DAYS_CREDIT_ENDDATE1'].diff()
+    # grp1['DAYS_ENDDATE_DIFF'] = grp1['DAYS_ENDDATE_DIFF'].fillna(0).astype('uint32')
+    # del grp1['DAYS_CREDIT_ENDDATE1'], grp1['SK_ID_CURR']
+    # gc.collect()
+    # print("Difference days calculated")
 
     # ana tablo ile birleştirilmesi
     bureau = bureau.merge(grp1, on=['SK_ID_BUREAU'], how='left')

@@ -71,7 +71,7 @@ NAME_PAYMENT_TYPE
 Müşterinin önceki uygulama için ödemeyi seçtiği ödeme yöntemi
 
 ```python
-NAME_PAYMENT_TYPE    Count  \
+NAME_PAYMENT_TYPE    Count  /
 Cash through the bank                                1033552  1670214   
 Cashless from the account of the employer               1085  1670214   
 Non-cash from your account                              8193  1670214   
@@ -249,7 +249,7 @@ NaN                     673065  1670214       NaN          NaN
 
 DAYS_DECİSİON
 
-![](.\images\days_desicion.png)
+![](./images/days_desicion.png)
 
 *Çıkarımlar* : -500 den büyük değerlerin temerrüte düşme oranları yüksek .
 
@@ -257,7 +257,7 @@ DAYS_DECİSİON
 
 CNT_PAYMENT
 
-![](.\images\cnt_payment.png)
+![](./images/cnt_payment.png)
 
 *Çıkarımlar* : 5 ila 15 değerleri arasında temerrüte düşmeme durumunda ki olumlu farklılık gözlemlendi.
 
@@ -265,7 +265,7 @@ CNT_PAYMENT
 
 DAYS_FIRST_DRAWING
 
-![](.\images\days_first_drawing.png)
+![](./images/days_first_drawing.png)
 
 *Çıkarımlar* :  365.000 civarında'  ki değerlerin gün olarak bakıldığında anlamsiz olduğu görülüyor bu değerlere nan atamak mantıklı olacaktır.
 
@@ -273,7 +273,7 @@ DAYS_FIRST_DRAWING
 
 DAYS_FIRST_DUE
 
-![](.\images\days_fırst_due.png)
+![](./images/days_fırst_due.png)
 
 *Çıkarımlar* : 365.000 civarında'  ki değerlerin gün olarak bakıldığında anlamsiz olduğu görülüyor bu değerlere nan atamak mantıklı olacaktır.
 
@@ -281,7 +281,7 @@ DAYS_FIRST_DUE
 
 DAYS_LAST_DUE_1ST_VERSION
 
-![](.\images\days_last_due_1st_version.png)
+![](./images/days_last_due_1st_version.png)
 
 *Çıkarımlar* : 365.000 civarında'  ki değerlerin gün olarak bakıldığında anlamsiz olduğu görülüyor bu değerlere nan atamak mantıklı olacaktır.
 
@@ -289,7 +289,7 @@ DAYS_LAST_DUE_1ST_VERSION
 
 DAYS_LAST_DUE
 
-![](.\images\days_last_due.png)
+![](./images/days_last_due.png)
 
 *Çıkarımlar* : 365.000 civarında'  ki değerlerin gün olarak bakıldığında anlamsiz olduğu görülüyor bu değerlere nan atamak mantıklı olacaktır.
 
@@ -297,7 +297,7 @@ DAYS_LAST_DUE
 
 DAYS_TERMINATION
 
-![](.\images\days_termination.png)
+![](./images/days_termination.png)
 
 *Çıkarımlar* : 365.000 civarında'  ki değerlerin gün olarak bakıldığında anlamsiz olduğu görülüyor bu değerlere nan atamak mantıklı olacaktır.
 
