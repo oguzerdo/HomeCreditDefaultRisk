@@ -4,13 +4,13 @@ commit:
 	git commit -am "commit from make file"
 
 push:
-	git push origin master
+	git push origin main
 
 pull:
-	git pull origin master
+	git pull origin main
 
 fetch:
-	git fetch origin master
+	git fetch origin main
 
 reset:
 	rm -f .git/index
