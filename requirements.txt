@@ -1,0 +1,37 @@
+backcall==0.2.0
+certifi==2020.12.5
+colorama==0.4.4
+cycler==0.10.0
+decorator==4.4.2
+ipython==7.19.0
+ipython-genutils==0.2.0
+jedi==0.17.2
+joblib==1.0.0
+kiwisolver @ file:///C:/ci/kiwisolver_1604014703538/work
+lightgbm==2.3.0
+makefile==1.1.0
+matplotlib @ file:///C:/ci/matplotlib-base_1603355780617/work
+mkl-fft==1.2.0
+mkl-random==1.1.1
+mkl-service==2.3.0
+numpy @ file:///C:/ci/numpy_and_numpy_base_1603466732592/work
+olefile==0.46
+pandas @ file:///C:/ci/pandas_1608068219821/work
+parso==0.7.1
+pickleshare==0.7.5
+Pillow @ file:///C:/ci/pillow_1603823068645/work
+prompt-toolkit==3.0.8
+Pygments==2.7.3
+pyparsing==2.4.7
+python-dateutil==2.8.1
+pytz==2020.5
+scikit-learn==0.24.0
+scipy @ file:///C:/ci/scipy_1604596260408/work
+seaborn @ file:///tmp/build/80754af9/seaborn_1608578541026/work
+sip==4.19.13
+six @ file:///C:/ci/six_1605187374963/work
+threadpoolctl==2.1.0
+tornado @ file:///C:/ci/tornado_1606942392901/work
+traitlets==5.0.5
+wcwidth==0.2.5
+wincertstore==0.2

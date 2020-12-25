@@ -4,7 +4,7 @@ commit:
 	git commit -am "commit from make file"
 
 push:
-	git push origin main
+	git push origin master
 
 pull:
 	git pull origin master
@@ -49,4 +49,3 @@ predict_test:
 # predict.py fonksiyonu ile tahmin edilen sonuçların kaggle'a gönderilmesi
 kaggle_submit_predict:
 	kaggle competitions submit -c home-credit-default-risk -f outputs/predictions/sub_from_prediction_py.csv -m "Message"
-
