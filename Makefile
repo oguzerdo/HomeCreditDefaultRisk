@@ -4,7 +4,7 @@ commit:
 	git commit -am "commit from make file"
 
 push:
-	git push origin master
+	git push origin main
 
 pull:
 	git pull origin master
@@ -50,5 +50,3 @@ predict_test:
 kaggle_submit_predict:
 	kaggle competitions submit -c home-credit-default-risk -f outputs/predictions/sub_from_prediction_py.csv -m "Message"
 
-muhat:
-	python models/dsmlbc2/muhat.py
