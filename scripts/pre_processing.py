@@ -7,6 +7,7 @@ from scripts.helper_functions import one_hot_encoder, label_encoder, rare_encode
 
 
 def application_train_test(num_rows=None, nan_as_category=False):
+    print("Application Table Preprocessing is started")
     # Read data and merge
     df = pd.read_csv('data/application_train.csv', nrows=num_rows)
     test_df = pd.read_csv("data/application_test.csv", nrows=num_rows)
@@ -128,12 +129,13 @@ def application_train_test(num_rows=None, nan_as_category=False):
     df = label_encoder(df, cat_cols)
 
     df, app_cols = one_hot_encoder(df, nan_as_category)
-
+    print("Application Table Preprocessing is finished")
     return df
 
 
 # Preprocess bureau.csv and bureau_balance.csv
 def bureau_and_balance(num_rows=None, nan_as_category=True):
+    print("Bureau & Balance Table Preprocessing is started")
     bureau = pd.read_csv("data/bureau.csv", nrows=num_rows)
     bb = pd.read_csv("data/bureau_balance.csv", nrows=num_rows)
 
@@ -339,11 +341,13 @@ def bureau_and_balance(num_rows=None, nan_as_category=True):
     bureau_agg = bureau_agg.join(closed_agg, how='left', on='SK_ID_CURR')
     del closed, closed_agg, bureau
     gc.collect()
+    print("Bureau & Balance Table Preprocessing is finished")
     return bureau_agg
 
 
 # Preprocess previous_applications.csv
 def previous_applications(num_rows=None, nan_as_category=True):
+    print("Previous Table Preprocessing is started")
     prev = pd.read_csv("data/previous_application.csv", nrows=num_rows)
     # Days 365.243 values -> nan
     prev['DAYS_FIRST_DRAWING'].replace(365243, np.nan, inplace=True)
@@ -460,10 +464,12 @@ def previous_applications(num_rows=None, nan_as_category=True):
     prev_agg = prev_agg.join(refused_agg, how='left', on='SK_ID_CURR')
     del refused, refused_agg, approved, approved_agg, prev
     gc.collect()
+    print("Previous Table Preprocessing is finished")
     return prev_agg
 
 
 def pos_cash(num_rows=None):
+    print("Pos Cash Table Preprocessing is started")
     pos = pd.read_csv("data/POS_CASH_balance.csv", nrows=num_rows)
     pos, cat_cols = one_hot_encoder(pos, nan_as_category=True)
     # Features
@@ -481,11 +487,13 @@ def pos_cash(num_rows=None):
     pos_agg['POS_COUNT'] = pos.groupby('SK_ID_CURR').size()
     del pos
     gc.collect()
+    print("Pos Cash Table Preprocessing is started")
     return pos_agg
 
 
 # Preprocess installments_payments.csv
 def installments_payments(num_rows=None):
+    print("Installments Payment Table Preprocessing is started")
     ins = pd.read_csv("data/installments_payments.csv", nrows=num_rows)
     ins, cat_cols = one_hot_encoder(ins, nan_as_category=True)
     # Percentage and difference paid in each installment (amount paid and installment value)
@@ -515,11 +523,13 @@ def installments_payments(num_rows=None):
     ins_agg['INSTAL_COUNT'] = ins.groupby('SK_ID_CURR').size()
     del ins
     gc.collect()
+    print("Installments Payment Table Preprocessing is finished")
     return ins_agg
 
 
 # Preprocess credit_card_balance.csv
 def credit_card_balance(num_rows=None, nan_as_category=True):
+    print("Credit Card Balance Table Preprocessing is started")
     cc = pd.read_csv("data/credit_card_balance.csv", nrows=num_rows)
     cc, cat_cols = one_hot_encoder(cc, nan_as_category)
     # General aggregations
@@ -530,4 +540,5 @@ def credit_card_balance(num_rows=None, nan_as_category=True):
     cc_agg['CC_COUNT'] = cc.groupby('SK_ID_CURR').size()
     del cc
     gc.collect()
+    print("Credit Card Balance Table Preprocessing is finished")
     return cc_agg
