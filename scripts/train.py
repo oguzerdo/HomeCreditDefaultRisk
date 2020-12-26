@@ -37,7 +37,6 @@ def kfold_lightgbm(df, debug=False):
                                                       "APP_index", "BURO_index", "PREV_index", "INSTAL_index",
                                                       "CC_index", "POS_index"]]
 
-
     for n_fold, (train_idx, valid_idx) in enumerate(folds.split(train_df[feats], train_df['TARGET'])):
         train_x, train_y = train_df[feats].iloc[train_idx], train_df['TARGET'].iloc[train_idx]
         valid_x, valid_y = train_df[feats].iloc[valid_idx], train_df['TARGET'].iloc[valid_idx]
@@ -98,9 +97,6 @@ def kfold_lightgbm(df, debug=False):
 
     # Final Model
     best_iter_1 = int(fold_auc_best_df.sort_values(by="AUC", ascending=False)[:1]["BEST_ITER"].values)
-
-    # AUC'ye gore sırala, ilk 3 fold'un best iter sayılarının ortalamasını al, virgulden sonra sayı olmasın.
-    # best_iter_3 = round(fold_auc_best_df.sort_values(by="AUC", ascending=False)[:3]["BEST_ITER"].mean(), 0)
 
     y_train = train_df["TARGET"]
     x_train = train_df[feats]
