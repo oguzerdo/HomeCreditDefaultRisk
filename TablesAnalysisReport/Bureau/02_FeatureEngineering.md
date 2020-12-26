@@ -88,11 +88,17 @@ bureau.loc[(bureau["CREDIT_TYPE"] == "Loan for the purchase of equipment"),"CRED
 
 ## **NEW FEATURES**
 
+
+
 **Feature1**
 
 **Bir müşterinin  farklı olarak sahip oldugu kredi sayısı :**
 
 **BUREAU_LOAN_COUNT**
+
+------
+
+
 
 ```python
 grp = df[['SK_ID_CURR', 'DAYS_CREDIT']].groupby(by = ['SK_ID_CURR'])['DAYS_CREDIT'].count().reset_index().rename(index=str, columns={'DAYS_CREDIT': 'BUREAU_LOAN_COUNT'})
@@ -104,11 +110,17 @@ Ve bu sonucları tabloya ekliyoruz.
 df = df.merge(grp, on = ['SK_ID_CURR'], how = 'left')
 ```
 
+
+
 **Feature2**
 
  **Bir müşterinin kaç farklı tipte krediye sahip oldugu :**
 
 **BUREAU_LOAN_TYPES**
+
+------
+
+
 
 ```python
 grp = df[['SK_ID_CURR', 'CREDIT_TYPE']].groupby(by = ['SK_ID_CURR'])['CREDIT_TYPE'].nunique().reset_index().rename(index=str, columns={'CREDIT_TYPE': 'BUREAU_LOAN_TYPES'})
@@ -120,11 +132,15 @@ Ve bu sonucları tabloya ekliyoruz.
 df = df.merge(grp, on = ['SK_ID_CURR'], how = 'left')
 ```
 
+
+
 **Feature3**  
 
 **Bir müşterinin aldıgı farklı kredi türlerinin oranı :**
 
 **AVERAGE_LOAN_TYPE**
+
+------
 
 Bir kişinin kaç farklı tipte krediye sahip olduğuna önceki featuredan biliyorduk loan types.
 
@@ -152,6 +168,8 @@ del df['BUREAU_LOAN_COUNT'], df['BUREAU_LOAN_TYPES']
 **Bureau datasındaki aktif durumda olan kredilerin diğer kredilerine göre yüzdesi :**
 
 **ACTIVE_LOANS_PERCENTAGE**
+
+------
 
 Bu değişkende sonucların 1 e yakın olması bizim için kötü bir durum aktif olan kredilerinin fazla oldugunu bize gösteriyor.
 
@@ -186,6 +204,8 @@ del df['CREDIT_ACTIVE_BINARY']
 
 **DAYS_CREDIT_DIFF**
 
+------
+
 Bir kişinin aldığı farklı kredilerin alınma günleri sıraladık ;
 
 ```python
@@ -208,11 +228,15 @@ Ve bu sonucları ana tabloya ekliyoruz ;
 B = B.merge(grp1, on = ['SK_ID_BUREAU'], how = 'left')
 ```
 
+
+
 **Feature6**
 
 **Müşteri bazlı ödemesi devam eden kredi sayılarının ortalamaları**
 
 **CREDIT_ENDDATE_PERCENTAGE**
+
+------
 
 Burada sonuçlarımızın 1 e yakın olması kötüye işaret.
 
@@ -243,11 +267,15 @@ B = B.merge(grp, on = ['SK_ID_CURR'], how = 'left')
 del B['CREDIT_ENDDATE_BINARY'] #gereksiz olan binary columnun düşürülmesi
 ```
 
+
+
 **Feature7**
 
 **Ödenen borç yüzdesi**
 
 **NEW_AMT_PER_PAY**
+
+------
 
 0'a yakın olması iyi  1 e yakın olması kötü tıpkı Target gibi
 
@@ -261,7 +289,17 @@ Tek müşterinin eksi kredilerinin tamamına mean atılabilir. (ödenen borç y�
 df[NEW_AMT_PER_PAY]= 1 - ((df["AMT_CREDIT_SUM"]- df["AMT_CREDIT_SUM_DEBT"]) / df["AMT_CREDIT_SUM"])
 ```
 
+
+
 **Feature8**
+
+##### Ödenmemiş krediler arasındaki gün farkları
+
+##### DAYS_ENDDATE_DIFF
+
+------
+
+
 
 ```python
 #NOT: Groupby aggregation işleminde mean ve sum alınabilir
@@ -302,11 +340,15 @@ gc.collect()
 
 ```
 
+
+
 **Feature9**
 
 **Kişinin toplam gecikmiş borcunun toplam mevcut borcuna oranı**
 
 **OVERDUE_DEBT_RATIO**
+
+------
 
 B = df[0:10000]
 
@@ -430,8 +472,15 @@ test_df.shape
 (48744, 55)
 ```
 
-**Model Sonucu:**
+
+
+##### *Model Sonucu*:
+
+------
 
 ![](./images/basemodel.png)
 
 ![](./images/importancelast.png)
+
+------
+

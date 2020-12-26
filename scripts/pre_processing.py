@@ -9,7 +9,7 @@ from scripts.helper_functions import one_hot_encoder, label_encoder, rare_encode
 def application_train_test(num_rows=None, nan_as_category=False):
     # Read data and merge
     df = pd.read_csv('data/application_train.csv', nrows=num_rows)
-    test_df = pd.read_csv(r'C:\Users\oe\Desktop\HomeCreditDefaultRisk\data\application_test.csv', nrows=num_rows)
+    test_df = pd.read_csv("data/application_test.csv", nrows=num_rows)
     print("Train samples: {}, test samples: {}".format(len(df), len(test_df)))
     df = df.append(test_df).reset_index()
 
@@ -134,8 +134,8 @@ def application_train_test(num_rows=None, nan_as_category=False):
 
 # Preprocess bureau.csv and bureau_balance.csv
 def bureau_and_balance(num_rows=None, nan_as_category=True):
-    bureau = pd.read_csv(r'C:\Users\oe\Desktop\HomeCreditDefaultRisk\data\bureau.csv', nrows=num_rows)
-    bb = pd.read_csv(r'C:\Users\oe\Desktop\HomeCreditDefaultRisk\data\bureau_balance.csv', nrows=num_rows)
+    bureau = pd.read_csv("data/bureau.csv", nrows=num_rows)
+    bb = pd.read_csv("data/bureau_balance.csv", nrows=num_rows)
 
     # RARE ENCODING
 
@@ -344,7 +344,7 @@ def bureau_and_balance(num_rows=None, nan_as_category=True):
 
 # Preprocess previous_applications.csv
 def previous_applications(num_rows=None, nan_as_category=True):
-    prev = pd.read_csv(r'C:\Users\oe\Desktop\HomeCreditDefaultRisk\data\previous_application.csv', nrows=num_rows)
+    prev = pd.read_csv("data/previous_application.csv", nrows=num_rows)
     # Days 365.243 values -> nan
     prev['DAYS_FIRST_DRAWING'].replace(365243, np.nan, inplace=True)
     prev['DAYS_FIRST_DUE'].replace(365243, np.nan, inplace=True)
@@ -464,7 +464,7 @@ def previous_applications(num_rows=None, nan_as_category=True):
 
 
 def pos_cash(num_rows=None):
-    pos = pd.read_csv(r'C:\Users\oe\Desktop\HomeCreditDefaultRisk\data\POS_CASH_balance.csv', nrows=num_rows)
+    pos = pd.read_csv("data/POS_CASH_balance.csv", nrows=num_rows)
     pos, cat_cols = one_hot_encoder(pos, nan_as_category=True)
     # Features
     aggregations = {
@@ -486,7 +486,7 @@ def pos_cash(num_rows=None):
 
 # Preprocess installments_payments.csv
 def installments_payments(num_rows=None):
-    ins = pd.read_csv(r'C:\Users\oe\Desktop\HomeCreditDefaultRisk\data\installments_payments.csv', nrows=num_rows)
+    ins = pd.read_csv("data/installments_payments.csv", nrows=num_rows)
     ins, cat_cols = one_hot_encoder(ins, nan_as_category=True)
     # Percentage and difference paid in each installment (amount paid and installment value)
     ins['PAYMENT_PERC'] = ins['AMT_PAYMENT'] / ins['AMT_INSTALMENT']
@@ -520,7 +520,7 @@ def installments_payments(num_rows=None):
 
 # Preprocess credit_card_balance.csv
 def credit_card_balance(num_rows=None, nan_as_category=True):
-    cc = pd.read_csv(r'C:\Users\oe\Desktop\HomeCreditDefaultRisk\data\credit_card_balance.csv', nrows=num_rows)
+    cc = pd.read_csv("data/credit_card_balance.csv", nrows=num_rows)
     cc, cat_cols = one_hot_encoder(cc, nan_as_category)
     # General aggregations
     cc.drop(['SK_ID_PREV'], axis=1, inplace=True)

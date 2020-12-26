@@ -501,6 +501,8 @@ Son telefonun değiştirilme zamanını gösteren bu değişkende -900 ile -100 
 
 -5000 ile 0 arasında bir farklılık gözlemlenmiştir.
 
+------
+
 
 
 **EXT_SOURCE_1**
@@ -510,6 +512,8 @@ Son telefonun değiştirilme zamanını gösteren bu değişkende -900 ile -100 
 ###### *Çıkarımlar* : 
 
 Başka kaynaklardan gelen skorları içeren bu değişkende  önemli seviyede farklılıklar gözlemlenmiştir.
+
+------
 
 
 
@@ -521,6 +525,8 @@ Başka kaynaklardan gelen skorları içeren bu değişkende  önemli seviyede fa
 
 Başka kaynaklardan gelen skorları içeren bu değişkende  önemli seviyede farklılıklar gözlemlenmiştir.
 
+------
+
 
 
 **EXT_SOURCE_3**
@@ -531,5 +537,5 @@ Başka kaynaklardan gelen skorları içeren bu değişkende  önemli seviyede fa
 
 Başka kaynaklardan gelen skorları içeren bu değişkende  önemli seviyede farklılıklar gözlemlenmiştir.
 
-
+------
 
