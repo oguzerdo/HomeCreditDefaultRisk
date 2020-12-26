@@ -1,3 +1,7 @@
 # HomeCreditDefaultRisk
 
-Merhaba
+***Authors:***
+
+Oğuz Han Erdoğan
+
+Emre Gür

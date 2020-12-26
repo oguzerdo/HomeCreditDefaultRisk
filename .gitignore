@@ -1,2 +1,6 @@
 data/
 .idea/
+.run
+Application/.ipynb_checkpoints/
+Application/__pycache__/
+.home
