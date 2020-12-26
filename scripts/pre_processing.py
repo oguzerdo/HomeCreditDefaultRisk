@@ -9,7 +9,7 @@ from scripts.helper_functions import one_hot_encoder, label_encoder, rare_encode
 
 def application_train_test(num_rows=None, nan_as_category=False):
     # Read data and merge
-    df = pd.read_csv(r'C:\Users\oe\Desktop\HomeCreditDefaultRisk\data\application_train.csv', nrows=num_rows)
+    df = pd.read_csv('data/application_train.csv', nrows=num_rows)
     test_df = pd.read_csv(r'C:\Users\oe\Desktop\HomeCreditDefaultRisk\data\application_test.csv', nrows=num_rows)
     print("Train samples: {}, test samples: {}".format(len(df), len(test_df)))
     df = df.append(test_df).reset_index()
