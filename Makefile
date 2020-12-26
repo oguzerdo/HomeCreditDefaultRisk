@@ -19,7 +19,7 @@ reset:
 req:
 	pip freeze > requirements.txt
 
-compush: req commit push
+compush: commit push
 
 
 # CONSOL RUN
