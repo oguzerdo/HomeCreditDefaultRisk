@@ -1,4 +1,3 @@
-"""bu scriptte ön işleme fonksiyonları yer almaktadır."""
 
 import gc
 
