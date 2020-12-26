@@ -47,5 +47,5 @@ predict_test:
 	python scripts/predict.py --test
 
 # predict.py fonksiyonu ile tahmin edilen sonuçların kaggle'a gönderilmesi
-kaggle_submit_predict:
+submit:
 	kaggle competitions submit -c home-credit-default-risk -f outputs/predictions/reference_submission.csv -m "Message"
