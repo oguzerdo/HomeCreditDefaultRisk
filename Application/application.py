@@ -27,9 +27,6 @@ def timer(title):
     print("{} - done in {:.0f}s".format(title, time.time() - t0))
 
 
-
-
-
 # Read data and merge
 df = pd.read_csv(r'data\application_train.csv', nrows=None)
 test_df = pd.read_csv(r'data\application_test.csv', nrows=None)
@@ -80,7 +77,8 @@ df['NEW_EXT_WEIGHTED'] = df.EXT_SOURCE_1 * 2 + df.EXT_SOURCE_2 * 1 + df.EXT_SOUR
 np.warnings.filterwarnings('ignore', r'All-NaN (slice|axis) encountered')
 for function_name in ['min', 'max', 'mean', 'nanmedian', 'var']:
     feature_name = 'EXT_SOURCES_{}'.format(function_name.upper())
-    df["NEW_" + feature_name] = eval('np.{}'.format(function_name))(df[['EXT_SOURCE_1', 'EXT_SOURCE_2', 'EXT_SOURCE_3']], axis=1)
+    df["NEW_" + feature_name] = eval('np.{}'.format(function_name))(
+        df[['EXT_SOURCE_1', 'EXT_SOURCE_2', 'EXT_SOURCE_3']], axis=1)
 ################
 
 # FEATURE 14 - DOKUMANLARIN TOPLAMI / DOCS ATILDI
@@ -108,14 +106,6 @@ df["NEW_FRAUD_1"] = df["REG_CITY_NOT_LIVE_CITY"] + df["REG_CITY_NOT_WORK_CITY"] 
 df["NEW_FRAUD"] = (df["NEW_FRAUD_1"] + 1) * df["DAYS_ID_PUBLISH"]
 del df["NEW_FRAUD_1"]
 df["NEW_FRAUD_std"] = (df[["REG_CITY_NOT_LIVE_CITY", "REG_CITY_NOT_WORK_CITY", "LIVE_CITY_NOT_WORK_CITY"]]).std(axis=1)
-
-
-
-
-
-
-
-
 
 # CLEAN CLASSES & LABEL ENCODING PART
 
@@ -210,6 +200,7 @@ def rare_analyser(dataframe, target, rare_perc):
         print(pd.DataFrame({"COUNT": dataframe[var].value_counts(),
                             "RATIO": dataframe[var].value_counts() / len(dataframe),
                             "TARGET_MEDIAN": dataframe.groupby(var)[target].median()}), end="\n\n\n")
+
 
 df = rare_encoder(df, 0.05)
 

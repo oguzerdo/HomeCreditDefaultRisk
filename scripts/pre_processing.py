@@ -1,11 +1,10 @@
 """bu scriptte ön işleme fonksiyonları yer almaktadır."""
-''' emreye selamlar'''
 
 import gc
 
 import pandas as pd
 import numpy as np
-from scripts.helper_functions import one_hot_encoder, label_encoder
+from scripts.helper_functions import one_hot_encoder, label_encoder, rare_encoder, cols
 
 
 def application_train_test(num_rows=None, nan_as_category=False):
@@ -109,30 +108,6 @@ def application_train_test(num_rows=None, nan_as_category=False):
     df.loc[(df["OCCUPATION_TYPE"] == "Secretaries"), "OCCUPATION_TYPE"] = 4
     df.loc[(df["OCCUPATION_TYPE"] == "IT staff"), "OCCUPATION_TYPE"] = 4
 
-    def cols(dataframe, target, noc=10, ID=True):
-        """
-        noc : number of classes to threshold
-        ID : if your data has ID, index etc
-        """
-        vars_more_classes = []
-        if ID:
-            ID = dataframe.columns[0]
-        else:
-            ID = "x"
-
-        cat_cols = [col for col in dataframe.columns if dataframe[col].nunique() < noc
-                    and col not in target]
-
-        num_cols = [col for col in dataframe.columns if dataframe[col].nunique() > noc
-                    and dataframe[col].dtypes != "O"
-                    and col not in target
-                    and col not in cat_cols and col not in ID]
-
-        other_cols = [col for col in dataframe.columns if col not in cat_cols
-                      and col not in num_cols and col not in ID
-                      and col not in target]
-        return cat_cols, num_cols, other_cols
-
     drop_list = [
         'FLAG_EMP_PHONE', 'FLAG_MOBIL', 'FLAG_CONT_MOBILE',
         'LIVE_REGION_NOT_WORK_REGION', 'FLAG_EMAIL', 'FLAG_PHONE',
@@ -149,35 +124,11 @@ def application_train_test(num_rows=None, nan_as_category=False):
 
     cat_cols, num_cols, other_cols = cols(df, "TARGET")
 
-    def rare_encoder(dataframe, rare_perc):
-        temp_df = dataframe.copy()
-
-        rare_columns = [col for col in temp_df.columns if temp_df[col].dtypes == 'O'
-                        and (temp_df[col].value_counts() / len(temp_df) < rare_perc).any(axis=None)]
-
-        for var in rare_columns:
-            tmp = temp_df[var].value_counts() / len(temp_df)
-            rare_labels = tmp[tmp < rare_perc].index
-            temp_df[var] = np.where(temp_df[var].isin(rare_labels), 'Rare', temp_df[var])
-
-        return temp_df
-
-    def rare_analyser(dataframe, target, rare_perc):
-        rare_columns = [col for col in dataframe.columns if
-                        dataframe[col].dtypes == "O" and len(dataframe[col].value_counts()) <= 20
-                        and (dataframe[col].value_counts() / len(dataframe) < rare_perc).any(axis=None)]
-
-        for var in rare_columns:
-            print(var, ":", len(dataframe[var].value_counts()))
-            print(pd.DataFrame({"COUNT": dataframe[var].value_counts(),
-                                "RATIO": dataframe[var].value_counts() / len(dataframe),
-                                "TARGET_MEDIAN": dataframe.groupby(var)[target].median()}), end="\n\n\n")
-
     df = rare_encoder(df, 0.10)
 
     df = label_encoder(df, cat_cols)
 
-    df, app_cols = one_hot_encoder(df, True)
+    df, app_cols = one_hot_encoder(df, nan_as_category)
 
     return df
 
@@ -205,7 +156,7 @@ def bureau_and_balance(num_rows=None, nan_as_category=True):
     bureau["AMT_CREDIT_MAX_OVERDUE"] = bureau["AMT_CREDIT_MAX_OVERDUE"].fillna(
         0)  # nan değerler borcu yok diye değerlendirildi. model sonucuna göre kontrol edilecek.
     bureau.loc[((bureau["AMT_CREDIT_MAX_OVERDUE"] >= 0) | (
-                bureau["AMT_CREDIT_SUM_OVERDUE"] >= 0)), "NEW_DANGER"] = 0  # gecikmiş borcu olmayanlar
+            bureau["AMT_CREDIT_SUM_OVERDUE"] >= 0)), "NEW_DANGER"] = 0  # gecikmiş borcu olmayanlar
     bureau.loc[((bureau["AMT_CREDIT_MAX_OVERDUE"] >= 1) | (bureau[
                                                                "AMT_CREDIT_SUM_OVERDUE"] >= 1)), "NEW_DANGER"] = 1  # 100.000'e kadar gecikmiş (başka) kredi borcu olanlar
     bureau.loc[((bureau["AMT_CREDIT_MAX_OVERDUE"] >= 100000) | (bureau[
@@ -270,18 +221,18 @@ def bureau_and_balance(num_rows=None, nan_as_category=True):
     # # ana tablo ile birleştirme işlemleri
     # bureau = bureau.merge(grp1, on=['SK_ID_BUREAU'], how='left')
     # print("Difference in Dates between Previous CB applications is CALCULATED ")
-
-    # FEATURE 6: NEW_CREDIT_ENDDATE_PERCENTAGE | ÖDEMESİ DEVAM EDEN KREDİ SAYISI ORTALAMASI
-    bureau.loc[bureau['DAYS_CREDIT_ENDDATE'] < 0, "CREDIT_ENDDATE_BINARY"] = 0  # ödemesi bitmiş (Closed) krediler
-    bureau.loc[bureau['DAYS_CREDIT_ENDDATE'] >= 0, "CREDIT_ENDDATE_BINARY"] = 1  # ödemesi devam eden (Active) krediler
-    grp = bureau.groupby(by=['SK_ID_CURR'])['CREDIT_ENDDATE_BINARY'].mean().reset_index().rename(index=str, columns={
-        'CREDIT_ENDDATE_BINARY': 'NEW_CREDIT_ENDDATE_PERCENTAGE'})  # ödemesi devam eden kredi sayısının ortalamaları
-    del bureau['CREDIT_ENDDATE_BINARY']  # gereksiz olan binary columnun düşürülmesi
-    bureau = bureau.merge(grp, on=['SK_ID_CURR'], how='left')  # ana tabloya ekleme
+    #
+    # # FEATURE 6: NEW_CREDIT_ENDDATE_PERCENTAGE | ÖDEMESİ DEVAM EDEN KREDİ SAYISI ORTALAMASI
+    # bureau.loc[bureau['DAYS_CREDIT_ENDDATE'] < 0, "CREDIT_ENDDATE_BINARY"] = 0  # ödemesi bitmiş (Closed) krediler
+    # bureau.loc[bureau['DAYS_CREDIT_ENDDATE'] >= 0, "CREDIT_ENDDATE_BINARY"] = 1  # ödemesi devam eden (Active) krediler
+    # grp = bureau.groupby(by=['SK_ID_CURR'])['CREDIT_ENDDATE_BINARY'].mean().reset_index().rename(index=str, columns={
+    #     'CREDIT_ENDDATE_BINARY': 'NEW_CREDIT_ENDDATE_PERCENTAGE'})  # ödemesi devam eden kredi sayısının ortalamaları
+    # del bureau['CREDIT_ENDDATE_BINARY']  # gereksiz olan binary columnun düşürülmesi
+    # bureau = bureau.merge(grp, on=['SK_ID_CURR'], how='left')  # ana tabloya ekleme
 
     # FEATURE 7: NEW_AMT_PER_PAY | ÖDENEN BORÇ %Sİ
     bureau["NEW_AMT_PER_PAY"] = 1 - (
-                (bureau["AMT_CREDIT_SUM"] - bureau["AMT_CREDIT_SUM_DEBT"]) / bureau["AMT_CREDIT_SUM"])
+            (bureau["AMT_CREDIT_SUM"] - bureau["AMT_CREDIT_SUM_DEBT"]) / bureau["AMT_CREDIT_SUM"])
 
     # # FEATURE 8: DAYS_ENDDATE_DIFF | Ödenmemiş krediler arasındaki gün farkları
     # # NOT: Groupby aggregation işleminde mean ve sum alınabilir
@@ -310,10 +261,10 @@ def bureau_and_balance(num_rows=None, nan_as_category=True):
     # gc.collect()
     # print("Difference days calculated")
 
-    # ana tablo ile birleştirilmesi
-    bureau = bureau.merge(grp1, on=['SK_ID_BUREAU'], how='left')
-    del grp1, B1
-    gc.collect()
+    # # Ana tablo ile birleştirilmesi
+    # bureau = bureau.merge(grp1, on=['SK_ID_BUREAU'], how='left')
+    # del grp1, B1
+    # gc.collect()
 
     # FEATURE 9: Toplam Geciken Borç / Toplam Borç
     bureau['AMT_CREDIT_SUM_DEBT'] = bureau['AMT_CREDIT_SUM_DEBT'].fillna(0)  # nan değerler borç yok olarak alındı
@@ -325,8 +276,7 @@ def bureau_and_balance(num_rows=None, nan_as_category=True):
         'AMT_CREDIT_SUM_DEBT'].sum().reset_index().rename(index=str,
                                                           columns={'AMT_CREDIT_SUM_DEBT': 'TOTAL_CUSTOMER_DEBT'})
     grp2 = bureau[['SK_ID_CURR', 'AMT_CREDIT_SUM_OVERDUE']].groupby(by=['SK_ID_CURR'])[
-        'AMT_CREDIT_SUM_OVERDUE'].sum().reset_index().rename(index=str, columns={
-        'AMT_CREDIT_SUM_OVERDUE': 'TOTAL_CUSTOMER_OVERDUE'})
+        'AMT_CREDIT_SUM_OVERDUE'].sum().reset_index().rename(index=str, columns={'AMT_CREDIT_SUM_OVERDUE': 'TOTAL_CUSTOMER_OVERDUE'})
     # ana tabloya ekleme
     bureau = bureau.merge(grp1, on=['SK_ID_CURR'], how='left')
     bureau = bureau.merge(grp2, on=['SK_ID_CURR'], how='left')
@@ -337,7 +287,7 @@ def bureau_and_balance(num_rows=None, nan_as_category=True):
     del bureau['TOTAL_CUSTOMER_OVERDUE'], bureau['TOTAL_CUSTOMER_DEBT']  # gereksiz üretilen sütunlar kaldırıldı
     gc.collect()
 
-    ### Bureau Balance
+    # Bureau Balance
     bb, bb_cat = one_hot_encoder(bb, nan_as_category)
     bureau, bureau_cat = one_hot_encoder(bureau, nan_as_category)
     bb_aggregations = {'MONTHS_BALANCE': ['min', 'max', 'size']}
@@ -369,8 +319,10 @@ def bureau_and_balance(num_rows=None, nan_as_category=True):
     }
     # Bureau and bureau_balance categorical features
     cat_aggregations = {}
-    for cat in bureau_cat: cat_aggregations[cat] = ['mean']
-    for cat in bb_cat: cat_aggregations[cat + "_MEAN"] = ['mean']
+    for cat in bureau_cat:
+        cat_aggregations[cat] = ['mean']
+    for cat in bb_cat:
+        cat_aggregations[cat + "_MEAN"] = ['mean']
 
     bureau_agg = bureau.groupby('SK_ID_CURR').agg({**num_aggregations, **cat_aggregations})
     bureau_agg.columns = pd.Index(['BURO_' + e[0] + "_" + e[1].upper() for e in bureau_agg.columns.tolist()])
@@ -447,17 +399,17 @@ def previous_applications(num_rows=None, nan_as_category=True):
     del prev["DAYS_DECISION2"]
 
     prev.loc[((prev["NAME_CONTRACT_STATUS"] == "Approved") & (
-                prev['ANS_SPEED'] == "Fast")), "NEW_CREDIBILITY"] = 5  # hızlı ve olumlu onay alanlar
+            prev['ANS_SPEED'] == "Fast")), "NEW_CREDIBILITY"] = 5  # hızlı ve olumlu onay alanlar
     prev.loc[((prev["NAME_CONTRACT_STATUS"] == "Approved") & (
-                prev['ANS_SPEED'] == "Normal")), "NEW_CREDIBILITY"] = 4  # normal ve olumlu onay alanlar
+            prev['ANS_SPEED'] == "Normal")), "NEW_CREDIBILITY"] = 4  # normal ve olumlu onay alanlar
     prev.loc[((prev["NAME_CONTRACT_STATUS"] == "Approved") & (
-                prev['ANS_SPEED'] == "Late")), "NEW_CREDIBILITY"] = 3  # yavaş ve olumlu onay alanlar
+            prev['ANS_SPEED'] == "Late")), "NEW_CREDIBILITY"] = 3  # yavaş ve olumlu onay alanlar
     prev.loc[((prev["NAME_CONTRACT_STATUS"] == "Refused") & (
-                prev['ANS_SPEED'] == "Late")), "NEW_CREDIBILITY"] = 2  # yavaş ve olumsuz onay alanlar
+            prev['ANS_SPEED'] == "Late")), "NEW_CREDIBILITY"] = 2  # yavaş ve olumsuz onay alanlar
     prev.loc[((prev["NAME_CONTRACT_STATUS"] == "Refused") & (
-                prev['ANS_SPEED'] == "Normal")), "NEW_CREDIBILITY"] = 1  # normal ve olumsuz onay alanlar
+            prev['ANS_SPEED'] == "Normal")), "NEW_CREDIBILITY"] = 1  # normal ve olumsuz onay alanlar
     prev.loc[((prev["NAME_CONTRACT_STATUS"] == "Refused") & (
-                prev['ANS_SPEED'] == "Fast")), "NEW_CREDIBILITY"] = 0  # hızlı ve olumsuz onay alanlar
+            prev['ANS_SPEED'] == "Fast")), "NEW_CREDIBILITY"] = 0  # hızlı ve olumsuz onay alanlar
 
     # FEATURE 3 - "NEW_ANN/CDT" | müşteri maaşının kredi tutarına oranı
     prev["NEW_ANN/CDT_PERC"] = prev["AMT_ANNUITY"] / prev["AMT_CREDIT"]
@@ -489,7 +441,7 @@ def previous_applications(num_rows=None, nan_as_category=True):
         'NEW_PAY_ABILITY_PERC': ['min', 'max', 'mean'],
         'NEW_PAY_ANN/DOWN_PERC': ['min', 'max', 'mean']
     }
-    prev, cat_cols = one_hot_encoder(prev, nan_as_category=True)
+    prev, cat_cols = one_hot_encoder(prev, nan_as_category)
     # Previous applications categorical features
     cat_aggregations = {}
     for cat in cat_cols:
@@ -512,7 +464,7 @@ def previous_applications(num_rows=None, nan_as_category=True):
     return prev_agg
 
 
-def pos_cash(num_rows=None, nan_as_category=True):
+def pos_cash(num_rows=None):
     pos = pd.read_csv(r'C:\Users\oe\Desktop\HomeCreditDefaultRisk\data\POS_CASH_balance.csv', nrows=num_rows)
     pos, cat_cols = one_hot_encoder(pos, nan_as_category=True)
     # Features
@@ -534,7 +486,7 @@ def pos_cash(num_rows=None, nan_as_category=True):
 
 
 # Preprocess installments_payments.csv
-def installments_payments(num_rows=None, nan_as_category=True):
+def installments_payments(num_rows=None):
     ins = pd.read_csv(r'C:\Users\oe\Desktop\HomeCreditDefaultRisk\data\installments_payments.csv', nrows=num_rows)
     ins, cat_cols = one_hot_encoder(ins, nan_as_category=True)
     # Percentage and difference paid in each installment (amount paid and installment value)
@@ -570,7 +522,7 @@ def installments_payments(num_rows=None, nan_as_category=True):
 # Preprocess credit_card_balance.csv
 def credit_card_balance(num_rows=None, nan_as_category=True):
     cc = pd.read_csv(r'C:\Users\oe\Desktop\HomeCreditDefaultRisk\data\credit_card_balance.csv', nrows=num_rows)
-    cc, cat_cols = one_hot_encoder(cc, nan_as_category=True)
+    cc, cat_cols = one_hot_encoder(cc, nan_as_category)
     # General aggregations
     cc.drop(['SK_ID_PREV'], axis=1, inplace=True)
     cc_agg = cc.groupby('SK_ID_CURR').agg(['min', 'max', 'mean', 'sum', 'var'])

@@ -4,13 +4,17 @@ import gc
 import os
 import pickle
 import pandas as pd
-
+import cowsay
 from lightgbm import LGBMClassifier
 import numpy as np
 from sklearn.metrics import roc_auc_score
 from sklearn.model_selection import KFold
-
 from scripts.helper_functions import display_importances
+
+import warnings
+
+warnings.simplefilter(action='ignore', category=FutureWarning)
+pd.options.mode.chained_assignment = None  # fix copy warning
 
 
 def kfold_lightgbm(df, debug=False):
@@ -104,19 +108,19 @@ def kfold_lightgbm(df, debug=False):
     x_train = train_df[feats]
 
     final_model = LGBMClassifier(
-            n_jobs=-1,
-            n_estimators=best_iter_1,
-            learning_rate=0.02,
-            num_leaves=34,
-            colsample_bytree=0.9497036,
-            subsample=0.8715623,
-            max_depth=8,
-            reg_alpha=0.041545473,
-            reg_lambda=0.0735294,
-            min_split_gain=0.0222415,
-            min_child_weight=39.3259775,
-            silent=-1,
-            verbose=-1).fit(x_train, y_train)
+        n_jobs=-1,
+        n_estimators=best_iter_1,
+        learning_rate=0.02,
+        num_leaves=34,
+        colsample_bytree=0.9497036,
+        subsample=0.8715623,
+        max_depth=8,
+        reg_alpha=0.041545473,
+        reg_lambda=0.0735294,
+        min_split_gain=0.0222415,
+        min_child_weight=39.3259775,
+        silent=-1,
+        verbose=-1).fit(x_train, y_train)
 
     cur_dir = os.getcwd()
     os.chdir('models/reference/')
@@ -124,15 +128,16 @@ def kfold_lightgbm(df, debug=False):
     os.chdir(cur_dir)
 
     # her bir fold icin tahmin edilen valid_y'ler aslında train setinin y'lerinin farklı parcalarda yer alan tahminleri.
-    print('Full Train(Validasyon) AUC score %.6f' % roc_auc_score(train_df['TARGET'], oof_preds))
-
+    #print('Full Train(Validation) AUC score %.6f' % roc_auc_score(train_df['TARGET'], oof_preds))
+    cowsay.cow('Full Train(Validation) AUC score %.6f' % roc_auc_score(train_df['TARGET'], oof_preds))
     # Write submission file and plot feature importance
     if not debug:
+        cur_dir = os.getcwd()
+        os.chdir('outputs/predictions/')
         test_df['TARGET'] = sub_preds
-        test_df[['SK_ID_CURR', 'TARGET']].to_csv("predictions/reference_submission.csv", index=False)
-
+        test_df[['SK_ID_CURR', 'TARGET']].to_csv("reference_submission.csv", index=False)
+        os.chdir(cur_dir)
     display_importances(feature_importance_df)
     del x_train, y_train
 
     return feature_importance_df
-

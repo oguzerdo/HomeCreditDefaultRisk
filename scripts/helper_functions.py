@@ -1,5 +1,8 @@
 import pandas as pd
+import numpy as np
 from sklearn import preprocessing
+import pickle
+
 
 # One-hot encoding for categorical columns with get_dummies
 
@@ -22,11 +25,16 @@ def get_namespace():
 
 
 # i love data science
-def i_love_ds():
+def i_love_ds2():
     print('\n'.join([''.join([(' I_Love_Data_Science_'[(x - y) % len('I_Love_Data_Science_')]
                                if ((x * 0.05) ** 2 + (y * 0.1) ** 2 - 1) ** 3 - (x * 0.05) ** 2 * (
             y * 0.1) ** 3 <= 0 else ' ')
                               for x in range(-30, 30)]) for y in range(15, -15, -1)]))
+
+
+def cow_say():
+    import cowsay
+    cowsay.cow('Yazılım Öğrenseydin')
 
 
 # Display/plot feature importance
@@ -36,16 +44,15 @@ def display_importances(feature_importance_df_):
     cols = (feature_importance_df_[["feature", "importance"]]
             .groupby("feature")
             .mean()
-            .sort_values(by="importance", ascending=False)[:100].index)
+            .sort_values(by="importance", ascending=False)[:60].index)
     best_features = feature_importance_df_.loc[feature_importance_df_.feature.isin(cols)]
     plt.figure(figsize=(10, 20))
     sns.barplot(x="importance", y="feature", data=best_features.sort_values(by="importance", ascending=False))
     plt.title('LightGBM Features (avg over folds)')
     plt.tight_layout()
     plt.savefig('outputs/features/lgbm_importances.png')
+    plt.show()
 
-
-# missing values
 
 def missing_values(df):
     cols_with_na = [col for col in df.columns if df[col].isnull().sum() > 0]
@@ -53,8 +60,32 @@ def missing_values(df):
         print(col, np.round(df[cols_with_na].isnull().mean(), 3), " % missing values")
 
 
-# label encoder
+def cols(dataframe, target, noc=10, ID=True):
+    """
+    noc : number of classes to threshold
+    ID : if your data has ID, index etc
+    """
+    vars_more_classes = []
+    if ID:
+        ID = dataframe.columns[0]
+    else:
+        ID = "x"
 
+    cat_cols = [col for col in dataframe.columns if dataframe[col].nunique() < noc
+                and col not in target]
+
+    num_cols = [col for col in dataframe.columns if dataframe[col].nunique() > noc
+                and dataframe[col].dtypes != "O"
+                and col not in target
+                and col not in cat_cols and col not in ID]
+
+    other_cols = [col for col in dataframe.columns if col not in cat_cols
+                  and col not in num_cols and col not in ID
+                  and col not in target]
+    return cat_cols, num_cols, other_cols
+
+
+# label encoder
 def label_encoder(dataframe, categorical_columns):
     """
     2 sınıflı kategorik değişkeni 0-1 yapma
@@ -68,6 +99,32 @@ def label_encoder(dataframe, categorical_columns):
         if dataframe[col].nunique() == 2:
             dataframe[col] = labelencoder.fit_transform(dataframe[col])
     return dataframe
+
+
+def rare_analyser(dataframe, target, rare_perc):
+    rare_columns = [col for col in dataframe.columns if
+                    dataframe[col].dtypes == "O" and len(dataframe[col].value_counts()) <= 20
+                    and (dataframe[col].value_counts() / len(dataframe) < rare_perc).any(axis=None)]
+
+    for var in rare_columns:
+        print(var, ":", len(dataframe[var].value_counts()))
+        print(pd.DataFrame({"COUNT": dataframe[var].value_counts(),
+                            "RATIO": dataframe[var].value_counts() / len(dataframe),
+                            "TARGET_MEDIAN": dataframe.groupby(var)[target].median()}), end="\n\n\n")
+
+
+def rare_encoder(dataframe, rare_perc):
+    temp_df = dataframe.copy()
+
+    rare_columns = [col for col in temp_df.columns if temp_df[col].dtypes == 'O'
+                    and (temp_df[col].value_counts() / len(temp_df) < rare_perc).any(axis=None)]
+
+    for var in rare_columns:
+        tmp = temp_df[var].value_counts() / len(temp_df)
+        rare_labels = tmp[tmp < rare_perc].index
+        temp_df[var] = np.where(temp_df[var].isin(rare_labels), 'Rare', temp_df[var])
+
+    return temp_df
 
 
 # saving models

@@ -3,9 +3,7 @@ import time
 from contextlib import contextmanager
 import warnings
 
-
-from scripts.helper_functions import get_namespace, i_love_ds, label_encoder
-
+from scripts.helper_functions import get_namespace, cow_say
 
 from scripts.pre_processing import application_train_test, bureau_and_balance, previous_applications, pos_cash, \
     installments_payments, credit_card_balance
@@ -26,8 +24,7 @@ def main(debug=True):
     num_rows = 10000 if debug else None
 
     with timer("Pre-Processing"):
-
-        i_love_ds()
+        cow_say()
 
         # application_train_test
         df = application_train_test(num_rows)
