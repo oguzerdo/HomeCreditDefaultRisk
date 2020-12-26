@@ -2,7 +2,11 @@
 
 ## CATEGORIC FEATURES
 
-NAME_CONTRACT_TYPE  
+
+
+##### NAME_CONTRACT_TYPE  
+
+------
 
 Önceki başvurunun sözleşme ürün türü (Nakit kredi, tüketici kredisi [POS], ...)
 
@@ -19,7 +23,9 @@ XNA                                346  1670214   0.020716     1.000000
 
 
 
-WEEKDAY_APPR_PROCESS_START 
+##### WEEKDAY_APPR_PROCESS_START 
+
+------
 
 Müşteri önceki başvuru için haftanın hangi gününde başvurdu?
 
@@ -38,7 +44,9 @@ WEDNESDAY                      255010  1670214  15.268103     0.389538
 
 
 
-FLAG_LAST_APPL_PER_CONTRACT
+##### FLAG_LAST_APPL_PER_CONTRACT
+
+------
 
 Önceki sözleşme için son başvuru ise işaretleyin. Bazen müşterimizin veya katibimizin yanlışlıkla tek bir sözleşme için daha fazla başvuru olabilir.
 
@@ -52,7 +60,9 @@ Y                      1661739  1670214  99.49258     0.360178
 
 
 
-NFLAG_LAST_APPL_IN_DAY
+##### NFLAG_LAST_APPL_IN_DAY
+
+------
 
 Uygulama, istemcinin günlük son uygulamasıysa işaretleyin. Bazen müşteriler günde daha fazla başvuru için başvurur. Nadiren sistemimizde bir uygulamanın veritabanında iki kez olması da hata olabilir
 
@@ -66,7 +76,9 @@ NFLAG_LAST_APPL_IN_DAY    Count      Ratio  TARGET_MEAN
 
 
 
-NAME_PAYMENT_TYPE 
+##### NAME_PAYMENT_TYPE 
+
+------
 
 Müşterinin önceki uygulama için ödemeyi seçtiği ödeme yöntemi
 
@@ -88,7 +100,9 @@ XNA                                        37.563091     0.661577
 
 
 
-CODE_REJECT_REASON
+##### CODE_REJECT_REASON
+
+------
 
 Önceki başvuru neden reddedildi
 
@@ -109,7 +123,9 @@ XNA                   5244  1670214   0.313972     0.998474
 
 
 
-NAME_TPYE_SUITE
+##### NAME_TPYE_SUITE
+
+------
 
 Önceki başvuru için başvururken müşteriye kim eşlik etti
 
@@ -131,7 +147,9 @@ Group of people             2240  1670214   0.134115     0.214732
 
 
 
-NAME_CLIENT_TYPE
+##### NAME_CLIENT_TYPE
+
+------
 
 Önceki uygulama için başvururken müşteri eski mi yoksa yeni müşteri miydi
 
@@ -149,7 +167,9 @@ XNA                    1941  1670214   0.116213     0.685214
 
 
 
-NAME_PORTFOLIO
+##### NAME_PORTFOLIO
+
+------
 
 Önceki NAKİT, POS, ARAÇ,… uygulamasıydı.
 
@@ -168,7 +188,9 @@ XNA            372230  1670214  22.286366     0.931419
 
 
 
-NAME_PRODUCT_TYPE
+##### NAME_PRODUCT_TYPE
+
+------
 
 Önceki uygulama x-sell o walk-in miydi
 
@@ -185,7 +207,9 @@ x-sell              456287  1670214  27.319074     0.260003
 
 
 
-CHANNEL_TYPE
+##### CHANNEL_TYPE
+
+------
 
 Önceki uygulamanın müşterisinin satış alanı
 
@@ -207,7 +231,9 @@ Stone                             212083  1670214  12.697954     0.103992
 
 
 
-NAME_YIELD_GROUP
+##### NAME_YIELD_GROUP
+
+------
 
 Faiz oranı, önceki uygulamanın küçük orta ve yüksek olarak gruplandırılması
 
@@ -226,7 +252,9 @@ middle                385532  1670214  23.082791     0.161623
 
 
 
-NFLAG_INSURED_ON_APPROVAL
+##### NFLAG_INSURED_ON_APPROVAL
+
+------
 
 Müşteri önceki başvuru sırasında sigorta talep etti mi?
 
@@ -247,7 +275,9 @@ NaN                     673065  1670214       NaN          NaN
 
 
 
-DAYS_DECİSİON
+##### DAYS_DECİSİON
+
+------
 
 ![](./images/days_desicion.png)
 
@@ -255,7 +285,9 @@ DAYS_DECİSİON
 
 
 
-CNT_PAYMENT
+##### CNT_PAYMENT
+
+------
 
 ![](./images/cnt_payment.png)
 
@@ -263,7 +295,9 @@ CNT_PAYMENT
 
 
 
-DAYS_FIRST_DRAWING
+##### DAYS_FIRST_DRAWING
+
+------
 
 ![](./images/days_first_drawing.png)
 
@@ -271,7 +305,9 @@ DAYS_FIRST_DRAWING
 
 
 
-DAYS_FIRST_DUE
+##### DAYS_FIRST_DUE
+
+------
 
 ![](./images/days_fırst_due.png)
 
@@ -279,7 +315,9 @@ DAYS_FIRST_DUE
 
 
 
-DAYS_LAST_DUE_1ST_VERSION
+##### DAYS_LAST_DUE_1ST_VERSION
+
+------
 
 ![](./images/days_last_due_1st_version.png)
 
@@ -287,7 +325,9 @@ DAYS_LAST_DUE_1ST_VERSION
 
 
 
-DAYS_LAST_DUE
+##### DAYS_LAST_DUE
+
+------
 
 ![](./images/days_last_due.png)
 
@@ -295,7 +335,9 @@ DAYS_LAST_DUE
 
 
 
-DAYS_TERMINATION
+##### DAYS_TERMINATION
+
+------
 
 ![](./images/days_termination.png)
 

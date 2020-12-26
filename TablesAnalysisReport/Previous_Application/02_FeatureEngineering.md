@@ -2,7 +2,7 @@
 
 
 
-DAYS_FIRST_DRAWING
+##### DAYS_FIRST_DRAWING
 
 ------
 
@@ -14,7 +14,7 @@ prev['DAYS_FIRST_DRAWING'].replace(365243, np.nan, inplace= True)
 
 
 
-DAYS_FIRST_DUE
+##### DAYS_FIRST_DUE
 
 ------
 
@@ -26,7 +26,7 @@ prev['DAYS_FIRST_DUE'].replace(365243, np.nan, inplace= True)
 
 
 
-DAYS_LAST_DUE_1ST_VERSION
+##### DAYS_LAST_DUE_1ST_VERSION
 
 ------
 
@@ -38,7 +38,7 @@ Burada da benzer bir durum söz konusu aynı değeri görmekteyiz, bu değer NaN
 
 
 
-DAYS_LAST_DUE
+##### DAYS_LAST_DUE
 
 ------
 
@@ -50,7 +50,7 @@ Aynı değer NaN olarak değiştirildi.
 
 
 
-DAYS_TERMINATION
+##### DAYS_TERMINATION
 
 ------
 
@@ -86,7 +86,11 @@ prev['DAYS_TERMINATION'].replace(365243, np.nan, inplace= True)
 
 ### Az Rastlanan Değişkenler Kendilerine Yakın Sınıflara Aktarıldılar
 
-NAME_PAYMENT_TYPE
+##### NAME_PAYMENT_TYPE
+
+------
+
+
 
 ```python
                                                Ratio  TARGET_MEAN  
@@ -103,7 +107,11 @@ prev.loc[(prev["NAME_PAYMENT_TYPE"] == "Cashless from the account of the employe
 
 
 
-CODE_REJECT_REASON
+##### CODE_REJECT_REASON
+
+------
+
+
 
 ```python
 CODE_REJECT_REASON    Count      Ratio  TARGET_MEAN
@@ -124,7 +132,11 @@ prev.loc[(prev["CODE_REJECT_REASON"] != "CLIENT") & (prev["CODE_REJECT_REASON"] 
 
 
 
-CHANNEL_TYPE
+##### CHANNEL_TYPE
+
+------
+
+
 
 ```python
                             CHANNEL_TYPE    Count      Ratio  TARGET_MEAN
@@ -147,7 +159,11 @@ prev.loc[(prev["CHANNEL_TYPE"] == "Regional / Local"), "CHANNEL_TYPE"] = "Region
 
 
 
-NAME_YIELD_GROUP
+##### NAME_YIELD_GROUP
+
+------
+
+
 
 ```python
             NAME_YIELD_GROUP    Count      Ratio  TARGET_MEAN
@@ -167,7 +183,11 @@ prev.loc[(prev["NAME_YIELD_GROUP"] == "middle"), "NAME_YIELD_GROUP"] = "mid/high
 
 
 
-NAME_PORTFOLIO
+##### NAME_PORTFOLIO
+
+------
+
+
 
 ```python
 NAME_PORTFOLIO    Count      Ratio  TARGET_MEAN
@@ -202,6 +222,8 @@ prev["NAME_CONTRACT_STATUS"] = prev["NAME_CONTRACT_STATUS"].astype("int")
 
 # Feature Engineering
 
+
+
 **New Features** : 
 
 *Feature 1* : **NEW_APP_CREDIT_PERC**
@@ -213,6 +235,8 @@ Müşterinin istediği kredinin aldığı krediye oranı ile elde edilir.
 ```python
 prev['NEW_APP_CREDIT_PERC'] = prev['AMT_APPLICATION'] / prev['AMT_CREDIT']
 ```
+
+
 
 *Feature 2* : **NEW_CREDIBILITY**
 
@@ -233,7 +257,9 @@ prev.loc[((prev["NAME_CONTRACT_STATUS"] == "Refused" ) & (prev['ANS_SPEED'] == "
 prev.loc[((prev["NAME_CONTRACT_STATUS"] == "Refused" ) & (prev['ANS_SPEED'] == "Fast")),"NEW_CREDIBILITY"] = 0  #hızlı ve olumsuz onay alanlar 
 ```
 
-*Feature 3* : **NEW_ANN/CDT**
+
+
+**Feature 3* : **NEW_ANN/CDT**
 
 ------
 
@@ -242,6 +268,8 @@ Müşterinin maaşının kredi tutarına oranı ile elde edilir.
 ```python
 prev["NEW_ANN/CDT_PERC"] = prev["AMT_ANNUITY"] / prev["AMT_CREDIT"]
 ```
+
+
 
 *Feature 4* : **NEW_CDT/PAY**
 
@@ -253,6 +281,8 @@ Kredinin tam tutarının vadesine bölümü ile elde edilir.
 prev["NEW_CDT/PAY"] = prev["AMT_CREDIT"] / prev["CNT_PAYMENT"]
 ```
 
+
+
 *Feature 5* : **NEW_PAY_ABILITY**
 
 ------
@@ -263,7 +293,9 @@ Müşterinin geçmiş aylık kredi tutarının maaşına oranı     ***
 prev["NEW_PAY_ABILITY_PERC"] = prev["NEW_CDT/PAY"] / prev["AMT_ANNUITY"] 
 ```
 
-*Feature 6* : **NEW_ABILITY**
+
+
+*Feature 6*:  **NEW_ABILITY**
 
 ------
 
