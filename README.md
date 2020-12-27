@@ -40,7 +40,7 @@ The project also includes the **Makefile** file. Using Makefile, frequently repe
 
 ---
 
-## Table's Hierarchy 
+## Hierarchy Table
 
 ![tables](./TablesAnalysisReport/Application/images/tables.png)
 
