@@ -22,7 +22,7 @@ XNA has 4 observation values. It needs to be thrown away.
 
 ---
 
-**NAME_TYPE_SUITE : has 7 unique category 	- object**
+**NAME_TYPE_SUITE : **
 
 ```
 NAME_TYPE_SUITE : has 7 unique category 	- object
