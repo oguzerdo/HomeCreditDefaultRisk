@@ -50,7 +50,7 @@ Bu değişkende **Sold** ve **Bad Debt**  sınıfları verisetinde az olmasında
 
 
 
-**CNT_CREDIT_PROLONG **
+**CNT_CREDIT_PROLONG**
 
 ---
 
@@ -74,7 +74,7 @@ CNT_CREDIT_PROLONG : has 10 unique category 	- int64
 
 
 
-**CREDIT_TYPE **
+**CREDIT_TYPE**
 
 ------
 
@@ -104,7 +104,7 @@ Müşterinin diğer kredilerini geciktirme durumlarını gün olarak ifade ediyo
 
 
 
-**DAYS_CREDİT_ENDDATE **
+**DAYS_CREDİT_ENDDATE**
 
 ------
 
