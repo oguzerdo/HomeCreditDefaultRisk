@@ -8,8 +8,11 @@
 
 ---
 This repo includes the scripts of a classification project created to predict the default risks of customers in the Home Credit Default Risk competition in Kaggle.
-https://www.kaggle.com/c/home-credit-default-risk?rvi=1
+
+[Home Credit Default Risk Competition](https://www.kaggle.com/c/home-credit-default-risk?rvi=1)
+
 ---
+
 The space occupied by the data set on the disk is 2.5 GB and the content of the data set is as follows;
 
 The data **consists of 7 different tables** and when each sub-table goes down, individual customer transactions are **multiplexed**. There is only one Unique ID belonging to a customer and these customers have more than one transactions in the sub-tables.
