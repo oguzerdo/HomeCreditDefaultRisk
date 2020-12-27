@@ -14,7 +14,7 @@ The space occupied by the data set on the disk is 2.5 GB and the content of the 
 
 The data **consists of 7 different tables** and when each sub-table goes down, individual customer transactions are **multiplexed**. There is only one Unique ID belonging to a customer and these customers have more than one transactions in the sub-tables.
 
-- **Application** table contains 307.511 observations, besides it has 122 features.
+- **Application** table contains **307.511 observations**, besides it has **122** features.
 - **Bureau** table contains **1.716.428** observations, while it has **17** features. 
 - **Bureau & Balance** contains **27.299.925** observations, while it has **3** features. 
 - **Previous** table contains **1.670.214** observations, besides it has **37** features.
