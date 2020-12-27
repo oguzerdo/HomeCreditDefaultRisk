@@ -42,7 +42,7 @@ The project also includes the **Makefile** file. Using Makefile, frequently repe
 
 ## Hierarchy table
 
-![tables](C:\Users\acer\Desktop\HomeCreditDefaultRisk\TablesAnalysisReport\Application\images\tables.png)
+![tables](./TablesAnalysisReport/Application/images/tables.png)
 
 
 
