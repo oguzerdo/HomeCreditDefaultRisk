@@ -469,7 +469,7 @@ LIVE_CITY_NOT_WORK_CITY : has 2 unique category 	- int64
 
 **DAYS_BIRTH**
 
-![days_birth](C:\Users\acer\Desktop\HomeCreditDefaultRisk\TablesAnalysisReport\Application\images\days_birth.png)
+![days_birth](./TablesAnalysisReport/Application/images/days_birth.png)
 
 ###### *Inferences* : 
 
@@ -479,7 +479,7 @@ A difference between approximately -15000 and -8000 was observed in this variabl
 
 **DAYS_EMPLOYED**
 
-![days_employed](C:\Users\acer\Desktop\HomeCreditDefaultRisk\TablesAnalysisReport\Application\images\days_employed.png)
+![days_employed](./TablesAnalysisReport/Application/images/days_employed.png)
 
 ###### *Inferences* : 
 
@@ -491,7 +491,7 @@ Noise between -350000 and -400000 was detected in this variable given in days. T
 
 **DAYS_ID_PUBLISH**
 
-![days_id_publish](C:\Users\acer\Desktop\HomeCreditDefaultRisk\TablesAnalysisReport\Application\images\days_id_publish.png)
+![days_id_publish](./TablesAnalysisReport/Application/images/days_id_publish.png)
 
 ###### *Inferences* : 
 
@@ -501,7 +501,7 @@ In this variable, a difference between -3000 and 0 was observed.
 
 **DAYS_LAST_PHONE_CHANGE**
 
-![days_last_phone](C:\Users\acer\Desktop\HomeCreditDefaultRisk\TablesAnalysisReport\Application\images\days_last_phone.png)
+![days_last_phone](./TablesAnalysisReport/Application/images/days_last_phone.png)
 
 ###### *Inferences* : 
 
@@ -511,7 +511,7 @@ A difference between -900 and -100 was observed in this variable indicating the 
 
 **DAYS_REGISTRATION**
 
-![days_registration](C:\Users\acer\Desktop\HomeCreditDefaultRisk\TablesAnalysisReport\Application\images\days_registration.png)
+![days_registration](./TablesAnalysisReport/Application/images/days_registration.png)
 
 ###### *Inferences* : 
 
@@ -523,7 +523,7 @@ A difference between -5000 and 0 was observed.
 
 **EXT_SOURCE_1**
 
-![ex1](C:\Users\acer\Desktop\HomeCreditDefaultRisk\TablesAnalysisReport\Application\images\ex1.png)
+![ex1](./TablesAnalysisReport/Application/images/ex1.png)
 
 ###### *Inferences* : 
 
@@ -535,7 +535,7 @@ Significant differences were observed in this variable, which includes scores fr
 
 **EXT_SOURCE_2**
 
-![ex2](C:\Users\acer\Desktop\HomeCreditDefaultRisk\TablesAnalysisReport\Application\images\ex2.png)
+![ex2](./TablesAnalysisReport/Application/images/ex2.png)
 
 ###### *Inferences* :  
 
