@@ -125,3 +125,15 @@ cowsay~=3.0
 
 **Emre Gür** - [emregurr](https://github.com/emregurr)
 
+---
+
+## Special Thanks
+
+Dear **Mustafa Vahit Keskin** - [mvahit](https://github.com/mvahit)
+
+and to the owner of this reference notebook
+
+```
+Reference notebook : https://www.kaggle.com/jsaguiar/lightgbm-with-simple-features
+```
+
