@@ -1,9 +1,4 @@
 # Home Credit Default Risk
-
-This repo includes the scripts of a classification project created to estimate the default risks of customers in the Home Credit Default Risk contest in Kaggle.
-
-
-
 ---
 
 ## Authors
@@ -13,18 +8,20 @@ This repo includes the scripts of a classification project created to estimate t
 **Emre Gür** - [emregurr](https://github.com/emregurr)
 
 ---
+This repo includes the scripts of a classification project created to predict the default risks of customers in the Home Credit Default Risk competition in Kaggle.
+
 
 The space occupied by the data set on the disk is 2.5 GB and the content of the data set is as follows;
 
-The data **consists of 7 different tables ** and when each sub-table goes down, individual customer transactions are **multiplexed **. There is only one Unique ID belonging to a customer and these customers have more than one transactions in the sub-tables.
+The data **consists of 7 different tables** and when each sub-table goes down, individual customer transactions are **multiplexed**. There is only one Unique ID belonging to a customer and these customers have more than one transactions in the sub-tables.
 
 - **Application** table contains 307.511 observations, besides it has 122 features.
-- **Bureau** table contains **1.716.428 ** observations, while it has **17 ** features. 
-- **Bureau & Balance** contains **27.299.925** observations, while it has **3 ** features. 
+- **Bureau** table contains **1.716.428** observations, while it has **17** features. 
+- **Bureau & Balance** contains **27.299.925** observations, while it has **3** features. 
 - **Previous** table contains **1.670.214** observations, besides it has **37** features.
 - **POS Cash Balance** table contains **10.001.358** observations, and it has **8** features.
 - **Installments Payments** table contains **13.605.401** observations, while it has **8** features.
-- There are **3.840.312 ** observations and **23 ** feature in the **Credit Card Balance** table.
+- There are **3.840.312 ** observations and **23** feature in the **Credit Card Balance** table.
 
 
 
@@ -34,7 +31,7 @@ The tables we mentioned above are combined with the Application table by looking
 
 Throughout the project, **new variables** were tried to be produced as much as possible and the **effect** of the generated variables on the model estimation result was observed.
 
-Due to the large number of observations, a **Debug ** mode that can be controlled with **CLI ** was developed and the errors that occurred were tried to be corrected.
+Due to the large number of observations, a **Debug** mode that can be controlled with **CLI ** was developed and the errors that occurred were tried to be corrected.
 
 After data pre-processing, the images of the train and test sets are taken from the **RAM** to the **Disk** environment and the future processes are **guaranteed**.
 
@@ -56,7 +53,7 @@ The project also includes the **Makefile** file. Using Makefile, frequently repe
 
 ## Detailed EDA Reports of Tables
 
-You can reach the **detailed EDA analyzes** of the tables we think are the **most important** and the reports of the new variables created within the scope of the project from the links below.
+You can reach the **detailed EDA analysis** of the tables we think are the **most important** and the reports of the new variables created within the scope of the project from the links below.
 
 **Application**
 
@@ -109,12 +106,12 @@ python main.py
 
 ```
 pandas~=1.1.5
-cowsay~=3.0
 numpy~=1.19.2
 lightgbm~=2.0.3
 scikit-learn~=0.24.0
 seaborn~=0.11.1
 matplotlib~=3.3.2
+cowsay~=3.0
 ```
 
 [requirements.txt](https://github.com/oguzerdo/HomeCreditDefaultRisk/blob/main/requirements.txt)
