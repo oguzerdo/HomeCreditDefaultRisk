@@ -2,7 +2,7 @@
 
 ## CATEGORIC FEATURES
 
-**CODE_GENDER  - CİNSİYET**
+**CODE_GENDER  - GENDER**
 
 ```
 CODE_GENDER : has 3 unique category 	- object
@@ -14,11 +14,11 @@ M                 105059  307511 34.164        0.101
 XNA                    4  307511  0.001        0.000
 ```
 
-###### *Çıkarımlar* : 
+###### *Inferences* : 
 
-Cinsiyeti belirtiyor ve 3 sınıfı var. 
+It indicates gender and has been 3 classes.
 
-XNA 4 gözlem değerine sahip. Atılması gerekiyor.
+XNA has 4 observation values. It needs to be thrown away.
 
 ---
 
@@ -37,13 +37,15 @@ Spouse, partner            11370  307511  3.697        0.079
 Unaccompanied             248526  307511 80.819        0.082
 ```
 
-###### *Çıkarımlar* : 
+###### *Inferences* : 
 
-Birbirine yakın sınıflar var ve çeşitlilik yok düzenlenebilir veya atılabilir.
+There are classes close to each other and no variety can be edited or discarded.
 
 ---
 
-**NAME_INCOME_TYPE** : Kredi başvurusunda bulunurken müşteriye kim eşlik ediyordu?
+**NAME_INCOME_TYPE** : 
+
+Who was accompanying the client when applying for a loan?
 
 ```
 NAME_INCOME_TYPE : has 8 unique category 	- object
@@ -59,9 +61,9 @@ Unemployed                          22  307511  0.007        0.364
 Working                         158774  307511 51.632        0.096
 ```
 
-###### *Çıkarımlar* : 
+###### *Inferences* : 
 
-Atılabilir.
+It can be thrown away.
 
 ---
 
@@ -76,9 +78,9 @@ Lower secondary                               3816  307511  1.241        0.109
 Secondary / secondary special               218391  307511 71.019        0.089
 ```
 
-###### *Çıkarımlar* : 
+###### *Inferences* : 
 
-Label encode uygulanabilir.
+**Labelencoder** can be applied.
 
 ---
 
@@ -96,11 +98,11 @@ Unknown                                2  307511  0.001        0.000
 Widow                              16088  307511  5.232        0.058
 ```
 
-###### *Çıkarımlar* : 
+###### *Inferences* : 
 
-Sınıf sayısı indirgenebilir. Evli / Evli Değil
+The number of classes can be reduced. Married / Not Married
 
-Uç örnek : Boşanmış ve erkek olan müşterilerin durumları gözlemlenebilir.
+Extreme example: The situations of divorced and male customers can be observed.
 
 ---
 
@@ -118,9 +120,9 @@ Rented apartment                  4881  307511  1.587        0.123
 With parents                     14840  307511  4.826        0.117
 ```
 
-###### *Çıkarımlar* : 
+###### *Inferences* : 
 
-Sınıflar indirgenebilir. Aileleri ile yaşayanlarda ve apartman kiralayanlarda temerrüt durumu daha fazla.
+Classes can be demoted. The default situation is higher for those who live with their families and rent apartments.
 
 ---
 
@@ -134,11 +136,11 @@ FLAG_MOBIL : has 2 unique category 	- int64
 1      307510  307511 100.000        0.081
 ```
 
-###### *Çıkarımlar* : 
+###### *Inferences* : 
 
-Atılması gerekiyor.
+It needs to be thrown away.
 
----
+
 
 **FLAG_EMP_PHONE**
 
@@ -150,9 +152,9 @@ FLAG_EMP_PHONE : has 2 unique category 	- int64
 1          252125  307511 81.989        0.087
 ```
 
-###### *Çıkarımlar* : 
+###### *Inferences* : 
 
-Gereksiz gibi duruyor atılabilir.
+It seems unnecessary, it can be thrown away.
 
 ---
 
@@ -166,9 +168,9 @@ FLAG_PHONE : has 2 unique category 	- int64
 1       86431  307511 28.107        0.070
 ```
 
-###### *Çıkarımlar* : 
+###### *Inferences* : 
 
-Gereksiz gibi duruyor atılabilir.
+It seems unnecessary, it can be thrown away.
 
 ---
 
@@ -182,9 +184,9 @@ FLAG_EMAIL : has 2 unique category 	- int64
 1       17442  307511  5.672        0.079
 ```
 
-###### *Çıkarımlar* : 
+###### *Inferences* : 
 
-Gereksiz gibi duruyor atılabilir..
+It seems unnecessary, it can be thrown away.
 
 ---
 
@@ -203,11 +205,11 @@ TUESDAY                         53901  307511 17.528        0.084
 WEDNESDAY                       51934  307511 16.889        0.082
 ```
 
-###### *Çıkarımlar* : 
+###### *Inferences* : 
 
-Anlamsız atılabilir.
+It can be thrown away it is pointless.
 
----
+
 
 **REG_REGION_NOT_LIVE_REGION**
 
@@ -219,11 +221,11 @@ REG_REGION_NOT_LIVE_REGION : has 2 unique category 	- int64
 1                        4657  307511  1.514        0.093
 ```
 
-###### *Çıkarımlar* : 
+###### *Inferences* : 
 
-Çeşitlilik yok atılabilir.
+No variety can be discarded.
 
----
+
 
 **REG_REGION_NOT_WORK_REGION**
 
@@ -235,9 +237,9 @@ REG_REGION_NOT_WORK_REGION : has 2 unique category 	- int64
 1                       15612  307511  5.077        0.089
 ```
 
-###### *Çıkarımlar* : 
+###### *Inferences* : 
 
-Farklılık yok atılabilir.
+No difference can be thrown away.
 
 ---
 
@@ -251,9 +253,9 @@ LIVE_REGION_NOT_WORK_REGION : has 2 unique category 	- int64
 1                        12503  307511  4.066        0.084
 ```
 
-###### *Çıkarımlar* : 
+###### *Inferences* : 
 
-Farklılık yok atılabilir. 
+No difference can be thrown away.
 
 ---
 
@@ -270,9 +272,9 @@ reg oper spec account               12080  307511  3.928        0.066
 
 ```
 
-###### *Çıkarımlar* : 
+###### *Inferences* : 
 
-Anlamsız geldi atılabilir gibi duruyor.
+It looks frivolous, it seems throwable.
 
 ---
 
@@ -288,9 +290,9 @@ specific housing            1499  307511  0.487        0.101
 terraced house              1212  307511  0.394        0.085
 ```
 
-###### *Çıkarımlar* : 
+###### *Inferences* : 
 
-Atılmalı.
+It should be thrown away.
 
 ---
 
@@ -309,9 +311,9 @@ Stone, brick               64815  307511 21.077        0.074
 Wooden                      5362  307511  1.744        0.097
 ```
 
-###### *Çıkarımlar* : 
+###### *Inferences* : 
 
-Atılabilir.
+It should be thrown away.
 
 ---
 
@@ -326,21 +328,23 @@ No                                159428  307511 51.845        0.070
 Yes                                 2328  307511  0.757        0.096
 ```
 
-###### *Çıkarımlar* : 
+###### *Inferences* : 
 
-Atılabilir, çok az sayıda 
+There are very few observations that can be thrown away.
 
 ---
 
 **FLAG_DOCUMENT_XX**
 
-###### *Çıkarımlar* : 
+###### *Inferences* : 
 
-Tüm döküman sayılarının toplamları alınabilir. 20 tane var.
+The totals of all document numbers can be taken. There are 20 of them.
 
 ---
 
-**AMT_REQ_CREDIT_BUREAU_HOUR** : Başvurudan bir saat önce müşteri hakkında kredi bürosuna yapılan sorgu sayısı.
+**AMT_REQ_CREDIT_BUREAU_HOUR** : 
+
+The number of inquiries made to the credit bureau about the customer one hour before the application.
 
 ```
 AMT_REQ_CREDIT_BUREAU_HOUR : has 5 unique category 	- float64
@@ -353,9 +357,9 @@ AMT_REQ_CREDIT_BUREAU_HOUR : has 5 unique category 	- float64
 4.000                           1  307511  0.000        0.000
 ```
 
-###### *Çıkarımlar* : 
+###### *Inferences* : 
 
-Anlamsız gibi görünüyor.
+Seems to be pointless.
 
 ---
 
@@ -376,11 +380,11 @@ DEF_60_CNT_SOCIAL_CIRCLE : has 9 unique category 	- float64
 24.000                         1  307511  0.000        0.000
 ```
 
-###### *Çıkarımlar* : 
+###### *Inferences* : 
 
-Üzerinde çalışılması gerekiyor.
+It needs to be worked on.
 
----
+------
 
 
 
@@ -388,7 +392,7 @@ DEF_60_CNT_SOCIAL_CIRCLE : has 9 unique category 	- float64
 
 **FLAG_OWN_CAR + FLAG_OWN_REALTY**
 
-Arabası ve kendine özel mülkü var mı ?
+Does the customer have a Car and private property?
 
 ```
 FLAG_OWN_CAR : has 2 unique category 	- object
@@ -409,7 +413,9 @@ Y           213312  307511 69.367        0.080
 
 ---
 
-**REG_CITY_NOT_LIVE_CITY:**  Kalıcı adres iletişim adresiyle eşleşmiyorsa 1
+**REG_CITY_NOT_LIVE_CITY:**  
+
+1 , if the permanent address does not match the contact address
 
 ```
 REG_CITY_NOT_LIVE_CITY : has 2 unique category 	- int64
@@ -419,11 +425,15 @@ REG_CITY_NOT_LIVE_CITY : has 2 unique category 	- int64
 1                   24039  307511  7.817        0.122
 ```
 
-Güzel bir farklılık var bir şeyler türetilebilir.
+###### *Inferences* : 
+
+There is a nice difference, something can be derived.
 
 ---
 
-**REG_CITY_NOT_WORK_CITY:** Kalıcı adres iş adresi ile eşleşmiyorsa 1
+**REG_CITY_NOT_WORK_CITY:** 
+
+1, if the permanent address does not match the business address
 
 ```
 REG_CITY_NOT_WORK_CITY : has 2 unique category 	- int64
@@ -433,11 +443,15 @@ REG_CITY_NOT_WORK_CITY : has 2 unique category 	- int64
 1                   70867  307511 23.045        0.106
 ```
 
-Güzel bir farklılık var bir şeyler türetilebilir.
+###### *Inferences* : 
+
+There is a nice difference, something can be derived.
 
 ---
 
-**LIVE_CITY_NOT_WORK_CITY**: iletişim adresi iş adresi ile eşleşmiyorsa 1
+**LIVE_CITY_NOT_WORK_CITY**: 
+
+1 , if the contact address does not match the business address
 
 ```
 LIVE_CITY_NOT_WORK_CITY : has 2 unique category 	- int64
@@ -455,51 +469,53 @@ LIVE_CITY_NOT_WORK_CITY : has 2 unique category 	- int64
 
 **DAYS_BIRTH**
 
-![days_birth](./images/days_birth.png)
+![days_birth](C:\Users\acer\Desktop\HomeCreditDefaultRisk\TablesAnalysisReport\Application\images\days_birth.png)
 
-###### *Çıkarımlar* : 
+###### *Inferences* : 
 
-Bu değişkende yaklaşık olarak -15000 ile  -8000 arasında bir farklılık gözlemlenmiştir. 
+A difference between approximately -15000 and -8000 was observed in this variable.
 
 ---
 
 **DAYS_EMPLOYED**
 
-![days_employed](./images/days_employed.png)
+![days_employed](C:\Users\acer\Desktop\HomeCreditDefaultRisk\TablesAnalysisReport\Application\images\days_employed.png)
 
-###### *Çıkarımlar* : 
+###### *Inferences* : 
 
-Gün cinsinden verilen bu değişkende -350000 ile -400000 arasında gürültü tespit edilmiştir . Bu sayılar yaklaşık olarak 1000 yıla denk gelmektedir. Çıkarılması gerekiyor.
+Noise between -350000 and -400000 was detected in this variable given in days. These numbers correspond to approximately 1000 years. It needs to be removed.
+
+---
 
 ---
 
 **DAYS_ID_PUBLISH**
 
-![days_id_publish](./images/days_id_publish.png)
+![days_id_publish](C:\Users\acer\Desktop\HomeCreditDefaultRisk\TablesAnalysisReport\Application\images\days_id_publish.png)
 
-###### *Çıkarımlar* : 
+###### *Inferences* : 
 
-Bu değişkende ise - 3000 ile 0 arasında bir farklılık gözlemlenmiştir.
+In this variable, a difference between -3000 and 0 was observed.
 
 ---
 
 **DAYS_LAST_PHONE_CHANGE**
 
-![days_last_phone](./images/days_last_phone.png)
+![days_last_phone](C:\Users\acer\Desktop\HomeCreditDefaultRisk\TablesAnalysisReport\Application\images\days_last_phone.png)
 
-###### *Çıkarımlar* : 
+###### *Inferences* : 
 
-Son telefonun değiştirilme zamanını gösteren bu değişkende -900 ile -100 arasında bir farklılık gözlemlenmiştir.
+A difference between -900 and -100 was observed in this variable indicating the replacement time of the last phone.
 
 ---
 
 **DAYS_REGISTRATION**
 
-![days_registration](./images/days_registration.png)
+![days_registration](C:\Users\acer\Desktop\HomeCreditDefaultRisk\TablesAnalysisReport\Application\images\days_registration.png)
 
-###### *Çıkarımlar* : 
+###### *Inferences* : 
 
--5000 ile 0 arasında bir farklılık gözlemlenmiştir.
+A difference between -5000 and 0 was observed.
 
 ------
 
@@ -507,11 +523,11 @@ Son telefonun değiştirilme zamanını gösteren bu değişkende -900 ile -100 
 
 **EXT_SOURCE_1**
 
-![ex1](./images/ex1.png)
+![ex1](C:\Users\acer\Desktop\HomeCreditDefaultRisk\TablesAnalysisReport\Application\images\ex1.png)
 
-###### *Çıkarımlar* : 
+###### *Inferences* : 
 
-Başka kaynaklardan gelen skorları içeren bu değişkende  önemli seviyede farklılıklar gözlemlenmiştir.
+Significant differences were observed in this variable, which includes scores from other sources.
 
 ------
 
@@ -519,11 +535,11 @@ Başka kaynaklardan gelen skorları içeren bu değişkende  önemli seviyede fa
 
 **EXT_SOURCE_2**
 
-![ex2](./images/ex2.png)
+![ex2](C:\Users\acer\Desktop\HomeCreditDefaultRisk\TablesAnalysisReport\Application\images\ex2.png)
 
-###### *Çıkarımlar* : 
+###### *Inferences* :  
 
-Başka kaynaklardan gelen skorları içeren bu değişkende  önemli seviyede farklılıklar gözlemlenmiştir.
+Significant differences were observed in this variable, which includes scores from other sources.
 
 ------
 
@@ -531,11 +547,11 @@ Başka kaynaklardan gelen skorları içeren bu değişkende  önemli seviyede fa
 
 **EXT_SOURCE_3**
 
-![ext3](./images/ext3.png)
+![ext3](C:\Users\acer\Desktop\HomeCreditDefaultRisk\TablesAnalysisReport\Application\images\ext3.png)
 
-###### *Çıkarımlar* : 
+###### *Inferences* : 
 
-Başka kaynaklardan gelen skorları içeren bu değişkende  önemli seviyede farklılıklar gözlemlenmiştir.
+Significant differences were observed in this variable, which includes scores from other sources.
 
 ------
 

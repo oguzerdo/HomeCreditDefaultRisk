@@ -4,7 +4,7 @@
 
 ------
 
-Değişkeni incelendiğinde "365243" degerinin bir çok fazla sayıda girildiğini gördük. Önce bunun gürültü olabileceğini sonrasında ise NaN değerler yerine yazıldığı kanısına vardık. Bu sebeple bu değeri NaN olarak değiştirildi.
+When the variable was examined, we saw that the value **"365243"** was entered in too many numbers. We first came to the conclusion that it might be **noise** and then it was written instead of NaN values. For this reason, this value has been changed to **NaN**.
 
 ```python
 df['DAYS_EMPLOYED'].replace(365243, np.nan, inplace=True)
@@ -14,7 +14,7 @@ df['DAYS_EMPLOYED'].replace(365243, np.nan, inplace=True)
 
 ------
 
-4 gözlem değeri XNA olarak girilmiş bu durumdan kurtarıldı.
+4 observation values entered as **XNA** were recovered from this situation.
 
 ```python
 df = df[df['CODE_GENDER'] != 'XNA']  
@@ -24,19 +24,17 @@ df = df[df['CODE_GENDER'] != 'XNA']
 
 ------
 
-Değişkenini incelediğimiz de NaN değerler gördük , bu değerlere sonucumuza etki etmeyeceğini düşünerek 0 atandı .
+When we examined the variable, we saw **NaN** values, and these values were assigned 0, considering that it would not affect our result.
 
 ```python
 df["OWN_CAR_AGE"] = df["OWN_CAR_AGE"].fillna(0)
 ```
 
-**DAYS_BIRTH**  
+**DAYS_BIRTH**  T
 
-------
+he variable was specifying its age value in days. By dividing this variable by **365**, the year
 
-Değişkeni yaş değerini gün cinsinden belirtiyordu bu değişkeni 365 ' e bölerek yıl
-
-haline getirdik. Ve sonrasında oluşturduğumuz değişkenin tipini "integer" şeklinde düzenledi.
+we made it. And then he arranged the type of the variable we created as **"integer".**
 
 ```python
 df["NEW_AGE"] = round(-1 * (df["DAYS_BIRTH"] / 365), 0)
@@ -47,7 +45,7 @@ df["NEW_AGE"] = df["NEW_AGE"].astype("int")
 
 ------
 
-Değişkeni müşterilerinin meslek bilgilerini içinde barındırıyordu bu meslekler target'a göre sınıflandırıldı.
+The variable contained the occupational information of the customers. These occupations were classified according to the **target**.
 
 ```python
 df.loc[(df["OCCUPATION_TYPE"] == "Drivers"), "OCCUPATION_TYPE"] = 1
@@ -78,7 +76,7 @@ df.loc[(df["OCCUPATION_TYPE"] == "IT staff"), "OCCUPATION_TYPE"] = 4
 
 ------
 
-Değişkeni müşterilerin eğitim bilgilerini içeriyor bu değişken target'a bakılarak ve birbirine yakın olanlar seçilerek sınıflandırıldı.
+The variable contains the training information of the customers. This variable is classified by looking at the **target** and selecting those that are close to each other.
 
 ```python
 df.loc[(df["NAME_EDUCATION_TYPE"] == "Academic degree"), "NAME_EDUCATION_TYPE"] = "Higher education"
@@ -94,7 +92,7 @@ df.loc[(df["NAME_EDUCATION_TYPE"] == "Lower secondary"), "NAME_EDUCATION_TYPE"] 
 
 ------
 
-Müşterinin çalıştığı gün sayısının yaşına oranıyla elde edilir.
+It is obtained by the ratio of the number of working days of the customer to the age of the customer.
 
 ```python
 df['DAYS_EMPLOYED_PERC'] = df['DAYS_EMPLOYED'] / df['DAYS_BIRTH']
@@ -106,7 +104,7 @@ df['DAYS_EMPLOYED_PERC'] = df['DAYS_EMPLOYED'] / df['DAYS_BIRTH']
 
 ------
 
-Müşterinin yıllık toplam gelirinin kredi miktarına oranıyla elde edilir.
+It is obtained by the ratio of the total annual income of the customer to the loan amount.
 
 ```python
 df['INCOME_CREDIT_PERC'] = df['AMT_INCOME_TOTAL'] / df['AMT_CREDIT']
@@ -118,7 +116,7 @@ df['INCOME_CREDIT_PERC'] = df['AMT_INCOME_TOTAL'] / df['AMT_CREDIT']
 
 ------
 
-Kredinin yıllık ödemesinin kredinin tamamına oranıyla elde edilir.
+Obtained by the ratio of the annual payment of the customer's loan to the entire loan.
 
 ```python
 df['PAYMENT_RATE'] = df['AMT_ANNUITY'] / df['AMT_CREDIT']
@@ -130,19 +128,19 @@ df['PAYMENT_RATE'] = df['AMT_ANNUITY'] / df['AMT_CREDIT']
 
 ------
 
-Ailede bulunan kişi sayısının yıllık toplam gelire oranıyla elde edilir.
+It is obtained by the ratio of the number of family members to the total annual income.
 
 ```python
 df['NEW_INC_PERS'] = df['AMT_INCOME_TOTAL'] / df['CNT_FAM_MEMBERS']
 ```
 
-Bunun dışında bunun benzeri olarak ailede cocuk sayısına oranı denendi.
+Apart from this, similarly, the ratio of the number of children in the family was tried.
 
 ```python
 df['NEW_INC_PER_CHLD'] = df['AMT_INCOME_TOTAL'] / (1 + df['CNT_CHILDREN'])
 ```
 
-Ancak importance üzerinde etkisi görülmediğinden çıkarıldı.
+However, it has been removed because it has no effect on importance.
 
 
 
@@ -150,7 +148,7 @@ Ancak importance üzerinde etkisi görülmediğinden çıkarıldı.
 
 ------
 
-Toplam kredi miktarının ailede bulunan kişi sayısına oranıyla elde edilir.
+It is obtained by the ratio of the total loan amount to the number of people in the family.
 
 ```python
 f['NEW_AMT/FAM'] = df['AMT_CREDIT'] / df['CNT_FAM_MEMBERS']
@@ -162,7 +160,7 @@ f['NEW_AMT/FAM'] = df['AMT_CREDIT'] / df['CNT_FAM_MEMBERS']
 
 ------
 
-Kredinin yıllık ödemesinin müşterinin toplam gelirine oranıyla elde edilir.
+It is obtained by the ratio of the annual payment of the loan to the total income of the customer.
 
 ```python
 f['NEW_ANNUITY_INCOME_PERC'] = df['AMT_ANNUITY'] / df['AMT_INCOME_TOTAL']
@@ -174,7 +172,7 @@ f['NEW_ANNUITY_INCOME_PERC'] = df['AMT_ANNUITY'] / df['AMT_INCOME_TOTAL']
 
 ------
 
-Müşterinin almak istediği ürün ile çektiği kredi arasındaki farka göre bir derecelendirme yapıldı.
+A rating was made according to the difference between the product the customer wants to buy and the credit the customer received.
 
 ```python
 df.loc[(df["AMT_CREDIT"] - df["AMT_GOODS_PRICE"] > 0), "NEW_AMT_STATUS"] = 1
@@ -182,7 +180,7 @@ df.loc[(df["AMT_CREDIT"] - df["AMT_GOODS_PRICE"] == 0), "NEW_AMT_STATUS"] = 2
 df.loc[(df["AMT_CREDIT"] - df["AMT_GOODS_PRICE"] < 0), "NEW_AMT_STATUS"] = 3
 ```
 
-Importance tablosunda etkisi neredeyse yok denecek kadar az görüldü ve çıkarıldı.
+In the Importance table, its effect was almost negligible and removed.
 
 
 
@@ -190,7 +188,7 @@ Importance tablosunda etkisi neredeyse yok denecek kadar az görüldü ve çıka
 
 ------
 
-Çekilen kredi ile ürün arasında bulunan farkın yıllık toplam gelire oranıyla elde edilir.
+It is obtained by the ratio of the difference between the loan and the product to the total annual income.
 
 ```python
 df["NEW_C-GP"] = (df["AMT_GOODS_PRICE"] - df["AMT_CREDIT"]) / df["AMT_INCOME_TOTAL"]
@@ -202,7 +200,7 @@ df["NEW_C-GP"] = (df["AMT_GOODS_PRICE"] - df["AMT_CREDIT"]) / df["AMT_INCOME_TOT
 
 ------
 
-Müşterinin yaşının toplam kredi miktarına oranıyla elde edilir.
+It is obtained by the ratio of the age of the customer to the total loan amount.
 
 ```python
 df["CREDIT/NEW_AGE"] = df['AMT_CREDIT'] / df["NEW_AGE"]
@@ -214,7 +212,7 @@ df["CREDIT/NEW_AGE"] = df['AMT_CREDIT'] / df["NEW_AGE"]
 
 ------
 
-Alınmak istenin ürünün toplam kredi miktarına oranıyla elde edilir.
+It is obtained by the ratio of the product to be purchased to the total loan amount.
 
 ```python
 df["NEW_GOODS/CREDIT"] = df["AMT_GOODS_PRICE"] / df["AMT_CREDIT"]
@@ -226,13 +224,15 @@ df["NEW_GOODS/CREDIT"] = df["AMT_GOODS_PRICE"] / df["AMT_CREDIT"]
 
 ------
 
-Müşterinin yaşının sahip olduğu arabanın yaşına oranıyla elde edilir .
+It is the ratio of the age of the customer to the age of the car owned by the customer.
 
 ```python
 df["NEW_AGE/CAR_AGE"] = df["NEW_AGE"] / df["OWN_CAR_AGE"]
 ```
 
-Veri seti incelendiginde en önemli değerler diğer kuruluşlardan alınan skorlardan oluşmaktadır.
+------
+
+**When the data set is examined, the most important values are the scores obtained from other organizations.**
 
 
 
@@ -240,13 +240,13 @@ Veri seti incelendiginde en önemli değerler diğer kuruluşlardan alınan skor
 
 ------
 
-Diğer kuruluşlardan alınan skorların çarpılmasıyla elde edilir.
+It is obtained by multiplying scores from other institutions.
 
 ```python
 df["NEW_EXT_X"] = df["EXT_SOURCE_1"] * df["EXT_SOURCE_2"] * df["EXT_SOURCE_3"]
 ```
 
-*Skora olan etkisi kontrol edildi ve çıkarıldı.
+* The effect on score  has been checked and removed
 
 
 
@@ -254,7 +254,7 @@ df["NEW_EXT_X"] = df["EXT_SOURCE_1"] * df["EXT_SOURCE_2"] * df["EXT_SOURCE_3"]
 
 ------
 
-Diğer kuruluşlardan alınan skorların ortalamasının alınmasıyla elde edilir.
+It is obtained by taking the average of scores from other organizations.
 
 ```python
 df["NEW_EXT_MEAN"] = df[['EXT_SOURCE_1', 'EXT_SOURCE_2', 'EXT_SOURCE_3']].mean(axis=1)
@@ -266,13 +266,13 @@ df["NEW_EXT_MEAN"] = df[['EXT_SOURCE_1', 'EXT_SOURCE_2', 'EXT_SOURCE_3']].mean(a
 
 ------
 
-Diğer kuruluşlardan alınan skorların standart sapmasının alınmasıyla elde edilir.
+It is obtained by taking the standard deviation of the scores from other institutions.
 
 ```python
 df['NEW_SCORES_STD'] = df[['EXT_SOURCE_1', 'EXT_SOURCE_2', 'EXT_SOURCE_3']].std(axis=1)
 ```
 
-Ürettiğimiz bu değişkende oluşacak boş değerleri yine bu değişkenin ortalamasıyla doldurdu.
+It filled the empty values that will occur in this variable that we produced with the average of this variable.
 
 ```python
 df['NEW_SCORES_STD'] = df['NEW_SCORES_STD'].fillna(df['NEW_SCORES_STD'].mean())
@@ -284,14 +284,14 @@ df['NEW_SCORES_STD'] = df['NEW_SCORES_STD'].fillna(df['NEW_SCORES_STD'].mean())
 
 ------
 
-Diğer kuruluşlardan alınan skorların en büyük fark yarattığı noktalar seçilerek temerrüt olması ya da olmaması durumunu açıklamak için 0 ve 1 atandı.
+The points where scores from other institutions make the greatest difference were selected and 0 and 1 were assigned to explain whether there is a default or not.
 
 ```python
 df.loc[(df["EXT_SOURCE_1"] >= 0.5) | (df["EXT_SOURCE_2"] >= 0.55) | (df["EXT_SOURCE_3"] >= 0.45), "NEW_BOMB"] = 0
     df.loc[(df["EXT_SOURCE_1"] < 0.5) | (df["EXT_SOURCE_2"] < 0.55) | (df["EXT_SOURCE_3"] < 0.45), "NEW_BOMB"] = 1
 ```
 
-*Kontroller yapıldıktan sonra çıkarıldı.
+* Removed after the controls were done.
 
 
 
@@ -299,7 +299,7 @@ df.loc[(df["EXT_SOURCE_1"] >= 0.5) | (df["EXT_SOURCE_2"] >= 0.55) | (df["EXT_SOU
 
 ------
 
-Dökümanların toplamı alındı.
+The total of the documents has been received.
 
 ```python
  docs = [f for f in df.columns if 'FLAG_DOC' in f]
@@ -313,20 +313,20 @@ Dökümanların toplamı alındı.
 
 ------
 
-Yaş değişkeni 1:Young to 5:Older şeklinde sınıflandırıldı.
+The age variable was classified as 1: Young to 5: Older.
 
 ```python
 df["NEW_AGE_RANK"] = pd.cut(x=df["NEW_AGE"], bins=[0, 27, 40, 50, 65, 99], labels=[1, 2, 3, 4, 5])
 ```
 
-Oluşturalan değişken "integer" hale getirildi ve sonra eski değişken silindi.
+The variable that created was made "integer" and then the old variable was deleted.
 
 ```python
 df["NEW_AGE_RANK"] = df["NEW_AGE_RANK"].astype("int")
 df.drop("NEW_AGE", axis=1, inplace=True)
 ```
 
-*Üretilen bu değişkenin de etkileri beğenilmedi ve çıkarıldı.
+* The effects of this variable were also not liked and removed.
 
 
 
@@ -334,7 +334,7 @@ df.drop("NEW_AGE", axis=1, inplace=True)
 
 ------
 
-Müşterinin son telefon değiştirdiği zamanın yaşına oranı ile elde edilir.
+It is obtained by the ratio of the age of the last phone replacement of the customer.
 
 ```python
 df['NEW_PHONE_TO_BIRTH_RATIO'] = df['DAYS_LAST_PHONE_CHANGE'] / df['DAYS_BIRTH']
@@ -346,7 +346,7 @@ df['NEW_PHONE_TO_BIRTH_RATIO'] = df['DAYS_LAST_PHONE_CHANGE'] / df['DAYS_BIRTH']
 
 ------
 
-Müşterinin son telefon değiştirdiği zamanın son çalıştığı işe başlama tarihine oranıyla elde edilir.
+It is obtained by the ratio of the last time the customer changed the phone to the last working date.
 
 ```python
 df['NEW_PHONE_TO_BIRTH_RATIO_EMPLOYER'] = df['DAYS_LAST_PHONE_CHANGE'] / df['DAYS_EMPLOYED']
@@ -358,7 +358,7 @@ df['NEW_PHONE_TO_BIRTH_RATIO_EMPLOYER'] = df['DAYS_LAST_PHONE_CHANGE'] / df['DAY
 
 ------
 
-Müşterinin çalıştığı sekördeki maaş ortalamaları 
+Average salary in the sector where the client works
 
 ```python
 INC_ORG =
@@ -372,7 +372,7 @@ df['NEW_INC_ORG'] = df['ORGANIZATION_TYPE'].map(INC_ORG)
 
 ------
 
-Kredi notlarının target'a etkilerine göre şekillendirilmesi.
+Shaping credit ratings according to their **target effects.**
 
 ```python
 df['NEW_EXT_WEIGHTED'] = df.EXT_SOURCE_1 * 2 + df.EXT_SOURCE_2 * 1 + df.EXT_SOURCE_3 * 3
@@ -384,7 +384,7 @@ df['NEW_EXT_WEIGHTED'] = df.EXT_SOURCE_1 * 2 + df.EXT_SOURCE_2 * 1 + df.EXT_SOUR
 
 ------
 
-Son telefon değiştirme tarihinin yaşına oranıyla elde edilir.
+Obtained by the ratio of the age of the last phone replacement date.
 
 ```python
 df['NEW_PHONE_TO_BIRTH_RATIO'] = df['DAYS_LAST_PHONE_CHANGE'] / df['DAYS_BIRTH']
@@ -396,7 +396,7 @@ df['NEW_PHONE_TO_BIRTH_RATIO'] = df['DAYS_LAST_PHONE_CHANGE'] / df['DAYS_BIRTH']
 
 ------
 
-Telefon değiştirme tarihinin işe başladığı tarihe oranıyla elde edilir.
+It is obtained by the ratio of the phone replacement date to the date of commencement.
 
 ```python
 df['NEW_PHONE_TO_BIRTH_RATIO_EMPLOYER'] = df['DAYS_LAST_PHONE_CHANGE'] / df['DAYS_EMPLOYED']
@@ -408,7 +408,7 @@ df['NEW_PHONE_TO_BIRTH_RATIO_EMPLOYER'] = df['DAYS_LAST_PHONE_CHANGE'] / df['DAY
 
 ------
 
-Telefon değiştirme tarihinin yıllık kredi ödemesine oranıyla elde edilir.
+It is obtained by the ratio of the phone replacement date to the annual loan payment.
 
 ```python
 df['NEW_PHO/ANNU'] = df['DAYS_LAST_PHONE_CHANGE'] / df['AMT_ANNUITY']
@@ -420,7 +420,7 @@ df['NEW_PHO/ANNU'] = df['DAYS_LAST_PHONE_CHANGE'] / df['AMT_ANNUITY']
 
 ------
 
-Telefon değiştirme tarihinin kaydını değiştirme tarihine oranıyla elde edilir.
+It is obtained by the ratio of the phone replacement date to the change date.
 
 ```python
 df["NEW_PHO/REG"] = df['DAYS_LAST_PHONE_CHANGE'] * df["DAYS_REGISTRATION"]
@@ -432,7 +432,7 @@ df["NEW_PHO/REG"] = df['DAYS_LAST_PHONE_CHANGE'] * df["DAYS_REGISTRATION"]
 
 ------
 
-Ürettiğimiz değişken ile adres uyumsuzluklarının çarpımları ile elde edilir.
+It is obtained by the product of the variable we produce and the address mismatches.
 
 ```python
 f["NEW_FRAUD_1"] = df["REG_CITY_NOT_LIVE_CITY"] + df["REG_CITY_NOT_WORK_CITY"] + df["LIVE_CITY_NOT_WORK_CITY"]
@@ -452,9 +452,10 @@ del df["NEW_FRAUD_1"]
 
 ------
 
-Dolandırıcılığı bulmaya çalıştığımız değişkenin standart sapması alındı.
+The standard deviation of the variable we are trying to find fraud with is taken.
 
 ```python
 df["NEW_FRAUD_std"] = (df[["REG_CITY_NOT_LIVE_CITY", "REG_CITY_NOT_WORK_CITY", "LIVE_CITY_NOT_WORK_CITY"]]).std(axis=1)
 ```
 
+# 
