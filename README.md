@@ -31,7 +31,7 @@ The tables we mentioned above are combined with the Application table by looking
 
 Throughout the project, **new variables** were tried to be produced as much as possible and the **effect** of the generated variables on the model estimation result was observed.
 
-Due to the large number of observations, a **Debug** mode that can be controlled with **CLI ** was developed and the errors that occurred were tried to be corrected.
+Due to the large number of observations, a **Debug** mode that can be controlled with **CLI** was developed and the errors that occurred were tried to be corrected.
 
 After data pre-processing, the images of the train and test sets are taken from the **RAM** to the **Disk** environment and the future processes are **guaranteed**.
 
