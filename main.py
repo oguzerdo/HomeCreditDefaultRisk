@@ -21,7 +21,7 @@ def timer(title):
 
 
 def main(debug=True):
-    num_rows = 30000 if debug else None
+    num_rows = 20000 if debug else None
 
     with timer("Pre-Processing"):
         cow_say()
