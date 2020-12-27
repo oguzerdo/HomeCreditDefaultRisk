@@ -2,6 +2,18 @@
 
 Bu repoda Kaggle’daki Home Credit Default Risk yarışmasında, müşterilerin temerrüt risklerini tahmin etmek amacıyla oluşturulmuş bir classification projesinin scriptleri yer almaktadır.
 
+
+
+---
+
+## Authors
+
+**Oğuz Han Erdoğan** -  [oguzerdo](https://github.com/oguzerdo)
+
+**Emre Gür** - [emregurr](https://github.com/emregurr)
+
+---
+
 Veri Setinin diskteki boyutu 2.5gb olmak üzere genel hatları şu şekildedir;
 
 Veriler **7 farklı tablodan** oluşmakta ve her bir alt tabloya inildiğinde tekil müşteri işlemleri **çoklanmış** şekildedir. Bir müşteriye ait tek bir Unique ID olmakta ve alt tablolarda bu müşterilerin birden fazla işlemleri bulunmakta.
@@ -10,19 +22,19 @@ Veriler **7 farklı tablodan** oluşmakta ve her bir alt tabloya inildiğinde te
 
 - Bureau tablosunda **1.716.428** gözlem ve **17** feature 
 
-- Bureau & Balance tablosunda **27299925** gözlem ve **3** feature 
+- Bureau & Balance tablosunda **27.299.925** gözlem ve **3** feature 
 
 - Previous tablosunda **1.670.214** gözlem ve **37** feature
 
-- POS Cash Balance tablosunda **10001358** gözlem ve **8** feature
+- POS Cash Balance tablosunda **10.001.358** gözlem ve **8** feature
 
-- Installments Payments tablosunda **13605401** gözlem ve **8** feature
+- Installments Payments tablosunda **13.605.401** gözlem ve **8** feature
 
-- Credit Card Balance tablosunda **3840312** gözlem ve **23** feature bulunmaktadır. 
+- Credit Card Balance tablosunda **3.840.312** gözlem ve **23** feature bulunmaktadır. 
 
 
 
-İlk olarak detaylı EDA çıktıları ile birlikte değişkenler tanınıp proje kapsamınca bütün adımları github üzerinde raporlanmıştır.
+İlk olarak detaylı EDA çıktıları ile birlikte değişkenler tanınıp proje kapsamınca bütün adımlar github üzerinde raporlanmıştır.
 
 Bu tablolar en üst tablo olan Application tablosu ile, değişkenlerinin çeşitli karakteristik özellikleriyle birlikte birleştirilmiştir. 
 
@@ -30,7 +42,7 @@ Proje kapsamında olabildiğince yeni değişkenler türetilmeye çalışılıp,
 
 Gözlem sayısının çokluğundan dolayı **CLI** ile kontrol edilebilen bir **Debug** modu geliştirilmiş ve hatalar düzeltilmeye çalışılmıştır.
 
-Veri ön işleme sonrasında RAM üzerinden Disk ortamına inerek train ve test setlerinin imageları alınarak ve ileriki süreçler garantiye alınmıştır.
+Veri ön işleme sonrasında RAM üzerinden Disk ortamına inerek train ve test setlerinin imageları alınarak ileriki süreçler garantiye alınmıştır.
 
 Proje **Makefile** dosyası da içermektedir. Makefile sayesinde sık tekrarlanan işlemler (model train, predict, tune, github commit, push, update, kaggle submit) işlemleri terminal üzerinden tek komuta indirgenmiştir.
 
