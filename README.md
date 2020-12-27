@@ -20,7 +20,7 @@ The data **consists of 7 different tables** and when each sub-table goes down, i
 - **Previous** table contains **1.670.214** observations, besides it has **37** features.
 - **POS Cash Balance** table contains **10.001.358** observations, and it has **8** features.
 - **Installments Payments** table contains **13.605.401** observations, while it has **8** features.
-- There are **3.840.312 ** observations and **23** feature in the **Credit Card Balance** table.
+- There are **3.840.312** observations and **23** feature in the **Credit Card Balance** table.
 
 
 
