@@ -1,6 +1,6 @@
 # Home Credit Default Risk
 
-Bu repoda Kaggle’daki Home Credit Default Risk yarışmasında, müşterilerin temerrüt risklerini tahmin etmek amacıyla oluşturulmuş bir classification projesinin scriptleri yer almaktadır.
+This repo includes the scripts of a classification project created to estimate the default risks of customers in the Home Credit Default Risk contest in Kaggle.
 
 
 
@@ -14,45 +14,39 @@ Bu repoda Kaggle’daki Home Credit Default Risk yarışmasında, müşterilerin
 
 ---
 
-Veri Setinin diskteki boyutu 2.5gb olmak üzere genel hatları şu şekildedir;
+The space occupied by the data set on the disk is 2.5 GB and the content of the data set is as follows;
 
-Veriler **7 farklı tablodan** oluşmakta ve her bir alt tabloya inildiğinde tekil müşteri işlemleri **çoklanmış** şekildedir. Bir müşteriye ait tek bir Unique ID olmakta ve alt tablolarda bu müşterilerin birden fazla işlemleri bulunmakta.
+The data **consists of 7 different tables ** and when each sub-table goes down, individual customer transactions are **multiplexed **. There is only one Unique ID belonging to a customer and these customers have more than one transactions in the sub-tables.
 
-- Application tablosunda: **307.511** gözlem ile birlikte **122** feature
-
-- Bureau tablosunda **1.716.428** gözlem ve **17** feature 
-
-- Bureau & Balance tablosunda **27.299.925** gözlem ve **3** feature 
-
-- Previous tablosunda **1.670.214** gözlem ve **37** feature
-
-- POS Cash Balance tablosunda **10.001.358** gözlem ve **8** feature
-
-- Installments Payments tablosunda **13.605.401** gözlem ve **8** feature
-
-- Credit Card Balance tablosunda **3.840.312** gözlem ve **23** feature bulunmaktadır. 
+- **Application** table contains 307.511 observations, besides it has 122 features.
+- **Bureau** table contains **1.716.428 ** observations, while it has **17 ** features. 
+- **Bureau & Balance** contains **27.299.925** observations, while it has **3 ** features. 
+- **Previous** table contains **1.670.214** observations, besides it has **37** features.
+- **POS Cash Balance** table contains **10.001.358** observations, and it has **8** features.
+- **Installments Payments** table contains **13.605.401** observations, while it has **8** features.
+- There are **3.840.312 ** observations and **23 ** feature in the **Credit Card Balance** table.
 
 
 
-İlk olarak detaylı EDA çıktıları ile birlikte değişkenler tanınıp proje kapsamınca bütün adımlar github üzerinde raporlanmıştır.
+First of all, the variables were defined along with the detailed **EDA** outputs and all the steps within the scope of the project were reported on **github.**
 
-Bu tablolar en üst tablo olan Application tablosu ile, değişkenlerinin çeşitli karakteristik özellikleriyle birlikte birleştirilmiştir. 
+The tables we mentioned above are combined with the Application table by looking at the **various characteristics** of their variables. The reason for doing this is that the **Application** table is the **main table**.
 
-Proje kapsamında olabildiğince yeni değişkenler türetilmeye çalışılıp, türetilen değişkenlerin model tahmin sonucuna etkisi gözlemlenmeye çalışılmıştır.
+Throughout the project, **new variables** were tried to be produced as much as possible and the **effect** of the generated variables on the model estimation result was observed.
 
-Gözlem sayısının çokluğundan dolayı **CLI** ile kontrol edilebilen bir **Debug** modu geliştirilmiş ve hatalar düzeltilmeye çalışılmıştır.
+Due to the large number of observations, a **Debug ** mode that can be controlled with **CLI ** was developed and the errors that occurred were tried to be corrected.
 
-Veri ön işleme sonrasında RAM üzerinden Disk ortamına inerek train ve test setlerinin imageları alınarak ileriki süreçler garantiye alınmıştır.
+After data pre-processing, the images of the train and test sets are taken from the **RAM** to the **Disk** environment and the future processes are **guaranteed**.
 
-Proje **Makefile** dosyası da içermektedir. Makefile sayesinde sık tekrarlanan işlemler (model train, predict, tune, github commit, push, update, kaggle submit) işlemleri terminal üzerinden tek komuta indirgenmiştir.
+The project also includes the **Makefile** file. Using Makefile, frequently repeated operations **(model train, predict, tune, github commit, push, update, kaggle submit)** are made functional using a single command over the terminal.
 
 
 
 ---
 
-## Tablo Hiyerarşisi
+## Hierarchy table
 
-![tables](./TablesAnalysisReport/Application/images/tables.png)
+![tables](C:\Users\acer\Desktop\HomeCreditDefaultRisk\TablesAnalysisReport\Application\images\tables.png)
 
 
 
@@ -60,9 +54,9 @@ Proje **Makefile** dosyası da içermektedir. Makefile sayesinde sık tekrarlana
 
 
 
-## Tabloların Detaylı EDA Raporları
+## Detailed EDA Reports of Tables
 
-Aşağıdaki bağlantılardan en önemli olduğunu düşündüğümüz tabloların detaylı EDA analizlerine ve proje kapsamınca oluşturulan yeni değişkenlerin raporlarına ulaşabilirsiniz.
+You can reach the **detailed EDA analyzes** of the tables we think are the **most important** and the reports of the new variables created within the scope of the project from the links below.
 
 **Application**
 
